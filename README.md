@@ -4,7 +4,7 @@ Setup
 
 Python environment
 - Virtualenv
-  - Python 3.11
+  - Python 3.11.4
   - `pip install pip-tools`
 
 Dependencies
