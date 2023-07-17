@@ -25,3 +25,5 @@ typing-extensions==4.7.1
     #   fastapi
     #   pydantic
     #   pydantic-core
+
+uvicorn~=0.23.0
