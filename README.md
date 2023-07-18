@@ -1,19 +1,23 @@
 insight-ai-api
 
-Setup
+Setup instructions
+- See Makefile command table below
+
+| Command                     | Purpose            | Dependencies        |
+|-----------------------------|--------------------|---------------------|
+| `make venv`                 | Create/update venv |                     |
+| `make requirements.txt`     | PRD dependencies   | requirements.in     |
+| `make dev-requirements.txt` | DEV dependencies   | dev-requirements.in |
+
 
 Python environment
-- Virtualenv
-  - Python 3.11.4
+- Pyenv (.python-version)
+  - `pyenv local 3.11.4`
+
+- Virtualenv (venv/)
   - `pip install pip-tools`
 
-Dependencies
-- dev-requirements.in
-- requirements.in
-
-Requirements
-
-pip-tools
+Dependency management with pip-tools
 - `pip-compile requirements.in` will generate a requirments.txt file with all the dependencies in requirements.in
   - `pip-compile dev-requirements.in` will generate a dev-requirments.txt file with dependencies in dev-requirements.in
 - `pip-sync requirements.txt` will install all the package listed in the requirments.txt file
