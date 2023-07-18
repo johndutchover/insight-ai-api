@@ -1,6 +1,6 @@
 insight-ai-api
 
-Setup instructions
+## Setup instructions
 - See Makefile command table below
 
 | Command                     | Purpose                        | Dependencies        |
