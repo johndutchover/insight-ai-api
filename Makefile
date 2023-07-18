@@ -18,3 +18,10 @@ clean:
 	rm -rf venv
 	find -iname "*.pyc" -delete
 
+compile:
+	@rm -f requirements*.txt
+	@pip-compile requirements.in
+	@pip-compile dev-requirements.in
+
+sync:
+	@pip-sync requirements*.txt

@@ -1,6 +1,5 @@
 # dev-requirements.in
 -r requirements.txt
-pip-tools
 pyproject_hooks
 uvicorn
 pytest
