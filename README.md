@@ -3,11 +3,13 @@ insight-ai-api
 Setup instructions
 - See Makefile command table below
 
-| Command                     | Purpose            | Dependencies        |
-|-----------------------------|--------------------|---------------------|
-| `make venv`                 | Create/update venv |                     |
-| `make requirements.txt`     | PRD dependencies   | requirements.in     |
-| `make dev-requirements.txt` | DEV dependencies   | dev-requirements.in |
+| Command                     | Purpose                        | Dependencies        |
+|-----------------------------|--------------------------------|---------------------|
+| `make venv`                 | Create/update venv             |                     |
+| `make requirements.txt`     | PRD dependencies               | requirements.in     |
+| `make dev-requirements.txt` | DEV dependencies               | dev-requirements.in |
+| `make clean`                | remove venv and compiled files |                     |
+| `make compile && make sync` | Pull in latest packages        |                     |
 
 
 Python environment
