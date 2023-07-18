@@ -1,7 +1,11 @@
-insight-ai-api
+# insight-ai-api
 
-## Setup instructions
-- See Makefile command table below
+## About
+This is a simplistic FastAPI app that uses AI features to enhance api service.
+
+Setup instructions
+=====
+See Makefile command table below
 
 | Command                     | Purpose                        | Dependencies        |
 |-----------------------------|--------------------------------|---------------------|
