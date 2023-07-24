@@ -3,11 +3,16 @@ from fastapi import FastAPI
 # Create an instance of the FastAPI app
 app = FastAPI()
 
-
 # Define a route for the root endpoint ("/")
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
+
+@app.post("/fact_for_number/")
+def random_fact(word: str):
+    """Get a random fact for a word"""
+
+    return "42 is the reponse to the most important question"
 
 
 # Run the application using uvicorn server
