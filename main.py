@@ -3,10 +3,20 @@ from fastapi import FastAPI
 # Create an instance of the FastAPI app
 app = FastAPI()
 
+
 # Define a route for the root endpoint ("/")
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
+
+
+# Define a route to post translations
+@app.post("/translate/")
+def translate(text: str):
+    """Get a German response"""
+
+    return {"Guten Tag."}
+
 
 @app.post("/fact_for_number/")
 def random_fact(word: str):
