@@ -14,6 +14,8 @@ anyio==3.7.1
     #   starlette
 click==8.1.5
     # via uvicorn
+conventional-pre-commit==2.3.0
+    # via -r dev-requirements.in
 fastapi==0.100.0
     # via -r requirements.txt
 h11==0.14.0
