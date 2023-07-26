@@ -1,5 +1,7 @@
 # dev-requirements.in
 -r requirements.txt
-pyproject_hooks
-uvicorn
-pytest
+uvicorn~=0.23.1
+pytest~=7.4.0
+poethepoet~=0.21.1
+conventional-pre-commit~=2.3.0
+pipdeptree~=2.11.0
