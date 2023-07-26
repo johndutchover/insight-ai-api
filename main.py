@@ -1,7 +1,13 @@
 from fastapi import FastAPI
 
+from translate import router as translate_router
+from facts import router as facts_router
+
 # Create an instance of the FastAPI app
 app = FastAPI()
+
+app.include_router(translate_router, prefix="/translate")
+app.include_router(facts_router, prefix="/fact_for_number")
 
 
 # Define a route for the root endpoint ("/")
