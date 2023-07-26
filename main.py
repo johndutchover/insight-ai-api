@@ -15,14 +15,14 @@ def read_root():
 def translate(text: str):
     """Get a German response"""
 
-    return {"Guten Tag."}
+    return {"translation": "Guten Tag."}
 
 
 @app.post("/fact_for_number/")
 def random_fact(word: str):
     """Get a random fact for a word"""
 
-    return "42 is the reponse to the most important question"
+    return {"fact": "42 is the reponse to the most important question"}
 
 
 # Run the application using uvicorn server
