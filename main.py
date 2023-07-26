@@ -13,7 +13,7 @@ app.include_router(facts_router, prefix="/fact_for_number")
 # Define a route for the root endpoint ("/")
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return {"msg": "Hello World"}
 
 
 # Run the application using uvicorn server
