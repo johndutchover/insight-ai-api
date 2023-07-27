@@ -1,20 +1,36 @@
+image: python:3.11
+
 stages:
   - install
   - test
+  - deploy
 
 before_script:
   - python --version
   - pip install virtualenv
-  - virtualenv venv
-  - source venv/bin/activate
+  - virtualenv .venv
+  - source .venv/bin/activate
 
 install_dependencies:
   stage: install
   script:
     - pip install -r requirements.txt
     - pip install pytest
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    paths:
+      - .venv/
 
 test:
   stage: test
   script:
     - python -m pytest
+
+deploy-prod:
+  stage: deploy
+  script:
+    - echo "Deploy app from $CI_COMMIT_BRANCH branch"
+    - ./deploy.sh
+  environment: production
+  only:
+    - main
