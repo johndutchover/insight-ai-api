@@ -9,11 +9,11 @@ before_script:
   - python --version
   - pip install virtualenv
   - virtualenv .venv
-  - source .venv/bin/activate
 
 install_dependencies:
   stage: install
   script:
+    - source .venv/bin/activate
     - pip install -r requirements.txt
   cache:
     key: "$CI_COMMIT_REF_NAME"
