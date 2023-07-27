@@ -23,7 +23,12 @@ install_dependencies:
 test:
   stage: test
   script:
+    - source .venv/bin/activate
     - python -m pytest
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    paths:
+      - .venv/
 
 deploy-prod:
   stage: deploy
