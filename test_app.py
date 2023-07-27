@@ -1,4 +1,5 @@
 import pytest
+import httpx
 
 from main import app
 
