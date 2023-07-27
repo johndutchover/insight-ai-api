@@ -12,7 +12,7 @@ Set Python version using pyenv
 
 From repository root:
 1. `python -m venv .venv`
-2. `pip install pip-tools`
+2. `source .venv/bin/activate`
 3. `make venv`
 
 ### Dependency management
@@ -28,10 +28,14 @@ From repository root:
 
 See Makefile command table below
 
-| Command                     | Purpose                        | Dependencies        |
-|-----------------------------|--------------------------------|---------------------|
-| `make requirements.txt`     | PRD dependencies               | requirements.in     |
-| `make dev-requirements.txt` | DEV dependencies               | dev-requirements.in |
-| `make venv`                 | Update .venv/                  | .venv/              |
-| `make clean`                | remove venv and compiled files |                     |
-| `make compile && make sync` | Pull in latest packages        |                     |
+| Make command                    | Purpose                                                                                 |
+|---------------------------------|-----------------------------------------------------------------------------------------|
+| `make .venv/bin/activate`       | Create a Python virtual environment and install required packages"                      |
+| `make venv`                     | Target to create and activate the virtual environment                                   |
+| `make requirements.txt`         | Generate "requirements.txt" by compiling "requirements.in"                              |
+| `make dev-requirements.txt`     | Generate "dev-requirements.txt" by compiling "dev-requirements.in"                      |
+| `make compile-requirements`     | Regenerate "requirements.txt" using "pip-compile"                                       |
+| `make compile-dev-requirements` | Regenerate "dev-requirements.txt" using "pip-compile"                                   |
+| `make compile`                  | Regenerate both "requirements.txt" and "dev-requirements.txt"                           |
+| `make sync`                     | Sync virtual environment with "requirements.txt" and "dev-requirements.txt"             |
+| `make update`                   | Regenerate .in and .txt files and sync virtual environment with the latest dependencies |
