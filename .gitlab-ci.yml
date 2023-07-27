@@ -15,7 +15,6 @@ install_dependencies:
   stage: install
   script:
     - pip install -r requirements.txt
-    - pip install pytest
   cache:
     key: "$CI_COMMIT_REF_NAME"
     paths:
