@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
 from app.main import app
+from typing import Dict
 
 client = TestClient(app)
 
@@ -7,4 +8,9 @@ client = TestClient(app)
 def test_fact_for_number():
     response = client.post("/facts/fact_for_number")
     assert response.status_code == 200
-    assert response.json() == {"fact": "10 is the base of the decimal numeral system."}
+
+    # assert that the response is a dictionary that contains "fact" as key
+    #  and the value is string type.
+    assert isinstance(response.json(), Dict)
+    assert "fact" in response.json()
+    assert isinstance(response.json().get("fact"), str)

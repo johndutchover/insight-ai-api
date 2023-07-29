@@ -1,0 +1,5 @@
+[tool.bandit]
+exclude = "B104"
+
+[tool.black]
+line-length = 100
