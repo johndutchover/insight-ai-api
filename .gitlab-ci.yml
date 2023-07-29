@@ -20,14 +20,6 @@ install_dependencies:
     key: "$CI_COMMIT_REF_NAME"
     paths:
       - .venv/
-  rules:
-    - changes:
-        - README.md
-        - Makefile
-        - dev-requirements.in
-        - requirements.in
-        - pyproject.toml
-      when: never
 
 test:
   stage: test
@@ -38,14 +30,6 @@ test:
     key: "$CI_COMMIT_REF_NAME"
     paths:
       - .venv/
-  rules:
-    - changes:
-        - README.md
-        - Makefile
-        - dev-requirements.in
-        - requirements.in
-        - pyproject.toml
-      when: never
 
 deploy-prod:
   stage: deploy
@@ -53,6 +37,11 @@ deploy-prod:
     - echo "Deploy app from $CI_COMMIT_BRANCH branch"
     - ./deploy.sh
   environment: production
+  only:
+    - main
+
+job:
+  script: echo "exclusions for triggering CI"
   rules:
     - changes:
         - README.md
@@ -61,5 +50,3 @@ deploy-prod:
         - requirements.in
         - pyproject.toml
       when: never
-    - if: '$CI_COMMIT_BRANCH == "main"'
-      when: always
