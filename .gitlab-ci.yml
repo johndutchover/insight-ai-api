@@ -48,4 +48,5 @@ job:
         - Makefile
         - dev-requirements.in
         - requirements.in
+        - pyproject.toml
       when: never
