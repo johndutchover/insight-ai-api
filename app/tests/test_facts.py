@@ -4,6 +4,9 @@ from app.main import app
 client = TestClient(app)
 
 
+# TODO just want to check whether the response has the right format (e.g. types).
+
+
 def test_fact_for_number():
     response = client.post("/facts/fact_for_number")
     assert response.status_code == 200
