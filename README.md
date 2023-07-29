@@ -3,6 +3,18 @@
 ## About
 This is a simplistic FastAPI app that uses AI features to enhance api service.
 
+Focus areas:
+- [FastAPI](https://github.com/tiangolo/fastapi)
+- Pydantic
+  - Data validation
+- [Marvin](https://github.com/prefecthq/marvin)
+  - AI engineering framework
+- Pytest
+- [pre-commit](https://github.com/pre-commit/pre-commit)
+  - pre-commit hooks
+- GitLab
+  - for career reasons
+
 Set Python version using pyenv
 
 `pyenv local 3.11.4`

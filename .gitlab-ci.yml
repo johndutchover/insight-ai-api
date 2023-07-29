@@ -39,3 +39,13 @@ deploy-prod:
   environment: production
   only:
     - main
+
+job:
+  script: echo "exclusions for triggering CI"
+  rules:
+    - changes:
+        - README.md
+        - Makefile
+        - dev-requirements.in
+        - requirements.in
+      when: never
