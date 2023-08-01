@@ -29,6 +29,8 @@ beautifulsoup4==4.12.2
     # via
     #   -r requirements.txt
     #   marvin
+black==23.7.0
+    # via -r dev-requirements.in
 build==0.10.0
     # via pip-tools
 certifi==2023.7.22
@@ -47,6 +49,7 @@ charset-normalizer==3.2.0
 click==8.1.6
     # via
     #   -r requirements.txt
+    #   black
     #   pip-tools
     #   typer
     #   uvicorn
@@ -121,6 +124,8 @@ multidict==6.0.4
     #   -r requirements.txt
     #   aiohttp
     #   yarl
+mypy-extensions==1.0.0
+    # via black
 nodeenv==1.8.0
     # via pre-commit
 openai==0.27.8
@@ -129,16 +134,21 @@ openai==0.27.8
     #   marvin
 packaging==23.1
     # via
+    #   black
     #   build
     #   pytest
 pastel==0.2.1
     # via poethepoet
+pathspec==0.11.2
+    # via black
 pip-tools==7.1.0
     # via -r dev-requirements.in
 pipdeptree==2.11.0
     # via -r dev-requirements.in
 platformdirs==3.10.0
-    # via virtualenv
+    # via
+    #   black
+    #   virtualenv
 pluggy==1.2.0
     # via pytest
 poethepoet==0.21.1
