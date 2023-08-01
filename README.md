@@ -53,3 +53,11 @@ See Makefile command table below
 | `make compile`                  | Regenerate both "requirements.txt" and "dev-requirements.txt"                           |
 | `make sync`                     | Sync virtual environment with "requirements.txt" and "dev-requirements.txt"             |
 | `make update`                   | Regenerate .in and .txt files and sync virtual environment with the latest dependencies |
+
+### GitLab CI
+
+#### .gitlab-ci.yml
+
+#### .pre-commit-config.yaml
+
+##### .flake8
