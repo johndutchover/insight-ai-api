@@ -62,6 +62,7 @@ See Makefile command table below
   - test
   - code_quality
   - deploy
+    - uses `deploy.sh`
 
 #### .pre-commit-config.yaml
 - pre-commit-hooks
