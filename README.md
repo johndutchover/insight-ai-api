@@ -57,7 +57,19 @@ See Makefile command table below
 ### GitLab CI
 
 #### .gitlab-ci.yml
+- stages
+  - install
+  - test
+  - code_quality
+  - deploy
 
 #### .pre-commit-config.yaml
+- pre-commit-hooks
+- black
+  - `pyproject.toml`
+- flake8
+- bandit
+  - excludes B104 check
 
 ##### .flake8
+- configuration for flake8
