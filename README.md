@@ -27,7 +27,9 @@ Set Python version using pyenv
 From repository root:
 1. `python -m venv .venv`
 2. `source .venv/bin/activate`
-3. `make venv`
+3. `pip install pip-tools`
+4. `pip install --upgrade pip`
+5. `make venv`
 
 ### Dependency management
 
