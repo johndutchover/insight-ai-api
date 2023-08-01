@@ -3,6 +3,7 @@ image: python:3.11
 stages:
   - install
   - test
+  - code_quality
   - deploy
 
 before_script:
@@ -25,7 +26,6 @@ install_dependencies:
         - .gitlab-ci.yml
       when: always
     - changes:
-        - README.md
         - Makefile
         - dev-requirements.in
         - requirements.in
@@ -47,12 +47,24 @@ test:
         - .gitlab-ci.yml
       when: always
     - changes:
-        - README.md
         - Makefile
         - dev-requirements.in
         - requirements.in
         - pyproject.toml
       when: never
+    - when: on_success
+
+code_quality:
+  stage: code_quality
+  before_script:
+    - pip install pre-commit
+  script:
+    - pre-commit run --all-files
+  rules:
+    - changes:
+        - .pre-commit-config.yaml
+        - "**/*.py"
+      when: always
     - when: on_success
 
 deploy-prod:
@@ -66,7 +78,6 @@ deploy-prod:
         - .gitlab-ci.yml
       when: always
     - changes:
-        - README.md
         - Makefile
         - dev-requirements.in
         - requirements.in

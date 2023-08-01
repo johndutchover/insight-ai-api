@@ -53,3 +53,24 @@ See Makefile command table below
 | `make compile`                  | Regenerate both "requirements.txt" and "dev-requirements.txt"                           |
 | `make sync`                     | Sync virtual environment with "requirements.txt" and "dev-requirements.txt"             |
 | `make update`                   | Regenerate .in and .txt files and sync virtual environment with the latest dependencies |
+
+### GitLab CI
+
+#### .gitlab-ci.yml
+- stages
+  - install
+  - test
+  - code_quality
+  - deploy
+    - uses `deploy.sh`
+
+#### .pre-commit-config.yaml
+- pre-commit-hooks
+- black
+  - `pyproject.toml`
+- flake8
+- bandit
+  - excludes B104 check
+
+##### .flake8
+- configuration for flake8
