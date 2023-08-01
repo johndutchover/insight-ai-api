@@ -26,7 +26,6 @@ install_dependencies:
         - .gitlab-ci.yml
       when: always
     - changes:
-        - README.md
         - Makefile
         - dev-requirements.in
         - requirements.in
@@ -48,7 +47,6 @@ test:
         - .gitlab-ci.yml
       when: always
     - changes:
-        - README.md
         - Makefile
         - dev-requirements.in
         - requirements.in
@@ -80,7 +78,6 @@ deploy-prod:
         - .gitlab-ci.yml
       when: always
     - changes:
-        - README.md
         - Makefile
         - dev-requirements.in
         - requirements.in
