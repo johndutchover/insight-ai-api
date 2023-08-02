@@ -1,4 +1,5 @@
 import os
+import marvin
 
 from dotenv import load_dotenv
 from fastapi import FastAPI
@@ -14,6 +15,7 @@ app = FastAPI()
 app.include_router(facts.router, prefix="/facts", tags=["facts"])
 app.include_router(translate.router, prefix="/translate", tags=["translate"])
 
+marvin.settings.llm_model = "openai/gpt-3.5-turbo"
 marvin_openai_api_key = os.environ.get("MARVIN_OPENAI_API_KEY")
 
 
@@ -56,6 +58,10 @@ class Person(BaseModel):
     first_name: str
     last_name: str
 
+
+app.add_api_route("/generate_fruits", generate_fruits)
+app.add_api_route("/generate_vegetables", generate_vegetables)
+app.add_api_route("/person/extract", Person.route())
 
 if __name__ == "__main__":
     import uvicorn
