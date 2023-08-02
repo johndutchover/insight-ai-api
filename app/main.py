@@ -3,6 +3,9 @@ from pydantic import BaseModel, Field
 from fastapi import FastAPI
 from app.routers import facts, translate
 from marvin import ai_fn, ai_model
+from dotenv import load_dotenv
+
+load_dotenv()  # take environment variables from .env
 
 app = FastAPI()
 
