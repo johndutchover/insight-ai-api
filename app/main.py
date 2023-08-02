@@ -20,11 +20,6 @@ class Location(BaseModel):
     state: str = Field(..., description="The two-letter state abbreviation")
 
 
-@app.post("/location/")
-def create_location(location: Location):
-    return {"location": location}
-
-
 @app.get("/")
 def read_root():
     return {"msg": "Hello World"}
