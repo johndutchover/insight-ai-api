@@ -1,9 +1,11 @@
 import os
-from pydantic import BaseModel, Field
-from fastapi import FastAPI
-from app.routers import facts, translate
-from marvin import ai_fn, ai_model
+
 from dotenv import load_dotenv
+from fastapi import FastAPI
+from marvin import ai_fn, ai_model, AIApplication
+from pydantic import BaseModel
+
+from app.routers import facts, translate
 
 load_dotenv()  # take environment variables from .env
 
@@ -15,9 +17,22 @@ app.include_router(translate.router, prefix="/translate", tags=["translate"])
 marvin_openai_api_key = os.environ.get("MARVIN_OPENAI_API_KEY")
 
 
-class Location(BaseModel):
-    city: str
-    state: str = Field(..., description="The two-letter state abbreviation")
+# create models to represent the state of the insight-api app
+class Insight(BaseModel):
+    title: str
+    description: str = None
+    done: bool = False
+
+
+class InsightState(BaseModel):
+    todos: list[Insight] = []
+
+
+# create the app with an initial state and description
+insight_app = AIApplication(
+    state=InsightState(),
+    description="A simple app to provide insights using OpenAI.",
+)
 
 
 @app.get("/")
