@@ -1,12 +1,12 @@
 # dev-requirements.in
 -r requirements.txt
-pip-tools~=7.1.0
-uvicorn~=0.23.1
-pytest~=7.3.1
-poethepoet~=0.21.1
-pre-commit~=3.3.3
-conventional-pre-commit~=2.3.0
-pipdeptree~=2.11.0
-httpx~=0.24.1
-black~=23.7.0
-pydantic[dotenv]<2.0.0
+pip-tools
+uvicorn
+pytest
+poethepoet
+pre-commit
+conventional-pre-commit
+pipdeptree
+httpx
+black
+pydantic[dotenv]
