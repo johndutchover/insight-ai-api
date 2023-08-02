@@ -36,8 +36,8 @@ insight_app = AIApplication(
 
 
 @app.get("/")
-def read_root():
-    return {"msg": "Hello World"}
+def read_root(n: int = 10, color: str = "blue"):
+    return {"n": n, "color": color}
 
 
 # https://www.askmarvin.ai/deployment/
