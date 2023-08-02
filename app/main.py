@@ -40,13 +40,14 @@ def read_root():
     return {"msg": "Hello World"}
 
 
+# https://www.askmarvin.ai/deployment/
 @ai_fn
-def generate_fruits() -> list[str]:
+def generate_fruits(n: int) -> list[str]:
     """Generates a list of `n` fruits"""
 
 
 @ai_fn
-def generate_vegetables() -> list[str]:
+def generate_vegetables(n: int, color: str) -> list[str]:
     """Generates a list of `n` vegetables of color `color`"""
 
 
