@@ -2,6 +2,7 @@ import os
 from pydantic import BaseModel, Field
 from fastapi import FastAPI
 from app.routers import facts, translate
+from marvin import ai_fn, ai_model
 
 app = FastAPI()
 
@@ -24,6 +25,22 @@ def create_location(location: Location):
 @app.get("/")
 def read_root():
     return {"msg": "Hello World"}
+
+
+@ai_fn
+def generate_fruits() -> list[str]:
+    """Generates a list of `n` fruits"""
+
+
+@ai_fn
+def generate_vegetables() -> list[str]:
+    """Generates a list of `n` vegetables of color `color`"""
+
+
+@ai_model
+class Person(BaseModel):
+    first_name: str
+    last_name: str
 
 
 if __name__ == "__main__":
