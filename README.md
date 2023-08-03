@@ -1,6 +1,8 @@
 # insight-ai-api
 
+[![pipeline status](https://gitlab.com/johndutchover/insight-ai-api/badges/main/pipeline.svg)](https://gitlab.com/johndutchover/insight-ai-api/-/commits/main)
 [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
+[![Latest Release](https://gitlab.com/johndutchover/insight-ai-api/-/badges/release.svg)](https://gitlab.com/johndutchover/insight-ai-api/-/releases)
 
 ## About
 This is a simplistic FastAPI app that uses AI features to enhance api service.
