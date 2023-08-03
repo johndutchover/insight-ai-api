@@ -78,3 +78,7 @@ See Makefile command table below
 
 ##### .flake8
 - configuration for flake8
+
+### Fly
+
+https://insight-ai-api.fly.dev:8443
