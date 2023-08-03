@@ -9,8 +9,8 @@ exclude = "B104"
 # black configuration
 [tool.black]
 line-length = 100
-exclude = '\.idea/'
+exclude = '(\.idea/|fly-tf/)'
 
 # flake8 configuration
 [tool.flake8]
-exclude = '.idea'
+exclude = '.idea,fly-tf'
