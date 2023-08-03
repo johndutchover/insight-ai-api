@@ -71,6 +71,10 @@ bandit:
   stage: code_quality
   script:
     - source .venv/bin/activate
+    - echo "Activated virtual environment"
+    - which python
+    - pip install pre-commit
+    - echo "Installed pre-commit"
     - pre-commit run bandit --all-files
 
 deploy-prod:
