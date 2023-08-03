@@ -17,6 +17,7 @@ install_dependencies:
     - source .venv/bin/activate
     - pip install -r dev-requirements.txt
     - pip install -r requirements.txt
+    - pip install pre-commit
   cache:
     key: "$CI_COMMIT_REF_NAME"
     paths:
@@ -54,18 +55,23 @@ test:
       when: never
     - when: on_success
 
-code_quality:
+black:
   stage: code_quality
-  before_script:
-    - pip install pre-commit
   script:
-    - pre-commit run --all-files
-  rules:
-    - changes:
-        - .pre-commit-config.yaml
-        - "**/*.py"
-      when: always
-    - when: on_success
+    - source .venv/bin/activate
+    - pre-commit run black --all-files
+
+flake8:
+  stage: code_quality
+  script:
+    - source .venv/bin/activate
+    - pre-commit run flake8 --all-files
+
+bandit:
+  stage: code_quality
+  script:
+    - source .venv/bin/activate
+    - pre-commit run bandit --all-files
 
 deploy-prod:
   stage: deploy
