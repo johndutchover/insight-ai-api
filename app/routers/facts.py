@@ -1,14 +1,24 @@
+import os
 import marvin
+
 from fastapi import APIRouter
 from marvin import ai_fn
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
 
 router = APIRouter()
 
 marvin.settings.llm_model = "openai/gpt-3.5-turbo"
+marvin_openai_api_key = os.environ.get("MARVIN_OPENAI_API_KEY")
+
+# Set the OpenAI API key in marvin's settings
+marvin.settings.openai.api_key = marvin_openai_api_key
 
 
 @router.post("/fact_for_number")
 @ai_fn
-def random_fact(n: int) -> dict[int, str]:
-    """Get a random fact for `n` and return both as a dictionary with `n` as key
-    and the random fact as value"""
+def random_fact(n: int) -> dict[str, str]:
+    """Get a random fact for `n` and return it in a dictionary with 'fact' as key"""
+    fact = ...  # get the fact for `n`
+    return {"fact": fact}
