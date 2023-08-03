@@ -6,11 +6,11 @@ client = TestClient(app)
 
 
 def test_fact_for_number():
-    response = client.post("/facts/fact_for_number")
-    assert response.status_code == 200
+    test_values = [0, 1, 2, 5, 10, 100, 999]
 
-    # assert that the response is a dictionary that contains "fact" as key
-    #  and the value is string type.
-    assert isinstance(response.json(), Dict)
-    assert "fact" in response.json()
-    assert isinstance(response.json().get("fact"), str)
+    for n in test_values:
+        response = client.post(f"/facts/fact_for_number?n={n}")
+        assert response.status_code == 200
+        assert isinstance(response.json(), Dict)
+        assert str(n) in response.json()  # assuming the keys are strings
+        assert isinstance(response.json().get(str(n)), str)  # assuming the keys are strings
