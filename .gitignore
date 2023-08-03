@@ -226,4 +226,7 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 *.lnk
+
+### Custom ###
+*.tfplan
 # End of file
