@@ -59,22 +59,21 @@ black:
   stage: code_quality
   script:
     - source .venv/bin/activate
+    - pip install pre-commit
     - pre-commit run black --all-files
 
 flake8:
   stage: code_quality
   script:
     - source .venv/bin/activate
+    - pip install pre-commit
     - pre-commit run flake8 --all-files
 
 bandit:
   stage: code_quality
   script:
     - source .venv/bin/activate
-    - echo "Activated virtual environment"
-    - which python
     - pip install pre-commit
-    - echo "Installed pre-commit"
     - pre-commit run bandit --all-files
 
 deploy-prod:
