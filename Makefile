@@ -8,7 +8,7 @@ clean:
 	rm -rf .venv
 
 # .venv/bin/activate: Create a Python virtual environment and install required packages from "requirements.txt" and "dev-requirements.txt".
-.venv/bin/activate: requirements.txt dev-requirements.txt
+.venv/bin/activate: app/requirements.txt app/dev-requirements.txt
 	test -d .venv || python3 -m venv .venv
 	. .venv/bin/activate; pip install -U pip setuptools wheel
 	. .venv/bin/activate; pip install -r dev-requirements.txt; pip install -r requirements.txt
@@ -23,10 +23,10 @@ requirements.txt: requirements.in
 	pip-compile requirements.in
 
 # compile-requirements: Regenerate "requirements.txt" using "pip-compile".
-compile-requirements: requirements.txt
+compile-requirements: app/requirements.txt
 
 # compile-dev-requirements: Regenerate "dev-requirements.txt" using "pip-compile".
-compile-dev-requirements: dev-requirements.txt
+compile-dev-requirements: app/dev-requirements.txt
 
 # compile: Regenerate both "requirements.txt" and "dev-requirements.txt".
 compile: compile-requirements compile-dev-requirements
