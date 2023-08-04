@@ -9,6 +9,8 @@ stages:
 before_script:
   - apt-get update -qq && apt-get install -y curl
   - curl -L https://fly.io/install.sh | sh
+  - export FLYCTL_INSTALL="/root/.fly"
+  - export PATH="$FLYCTL_INSTALL/bin:$PATH"
   - python --version
   - pip install virtualenv
   - virtualenv .venv
@@ -82,6 +84,7 @@ deploy-prod:
   stage: deploy
   script:
     - echo "Deploy app from $CI_COMMIT_BRANCH branch"
+    - echo $FLY_API_TOKEN | flyctl auth login
     - flyctl deploy --ha=false --config app/fly.toml
   environment: production
   rules:
