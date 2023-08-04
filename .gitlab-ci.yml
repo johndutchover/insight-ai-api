@@ -84,7 +84,7 @@ deploy-prod:
   stage: deploy
   script:
     - echo "Deploy app from $CI_COMMIT_BRANCH branch"
-    - echo $FLY_API_TOKEN | flyctl auth login
+    - flyctl auth token $FLY_API_TOKEN
     - flyctl deploy --ha=false --config app/fly.toml
   environment: production
   rules:
