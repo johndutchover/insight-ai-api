@@ -1,8 +1,5 @@
 image: python:3.11.4
 
-variables:
-  PYTHONPATH: "$CI_PROJECT_DIR"
-
 stages:
   - install
   - test
