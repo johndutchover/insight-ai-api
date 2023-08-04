@@ -13,12 +13,12 @@ before_script:
   - export PATH="$FLYCTL_INSTALL/bin:$PATH"
   - python --version
   - pip install virtualenv
-  - virtualenv .venv
+  - python -m venv .venv
 
 install_dependencies:
   stage: install
   script:
-    - source .venv/bin/activate
+    - . .venv/bin/activate
     - pip install -r dev-requirements.txt
     - pip install -r requirements.txt
     - pip install pre-commit
@@ -41,7 +41,7 @@ install_dependencies:
 test:
   stage: test
   script:
-    - source .venv/bin/activate
+    - . .venv/bin/activate
     - python -m pytest
   cache:
     key: "$CI_COMMIT_REF_NAME"
@@ -62,21 +62,21 @@ test:
 black:
   stage: code_quality
   script:
-    - source .venv/bin/activate
+    - . .venv/bin/activate
     - pip install pre-commit
     - pre-commit run black --all-files
 
 flake8:
   stage: code_quality
   script:
-    - source .venv/bin/activate
+    - . .venv/bin/activate
     - pip install pre-commit
     - pre-commit run flake8 --all-files
 
 bandit:
   stage: code_quality
   script:
-    - source .venv/bin/activate
+    - . .venv/bin/activate
     - pip install pre-commit
     - pre-commit run bandit --all-files
 
