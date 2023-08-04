@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for insight-ai-api on 2023-08-04T13:38:47-04:00
+# fly.toml app configuration file generated for insight-ai-api on 2023-08-04T15:30:29-04:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -7,18 +7,12 @@ app = "insight-ai-api"
 primary_region = "ewr"
 
 [build]
-dockerfile = "../Dockerfile"
-image = "python:3.11.4"
+  dockerfile = "../Dockerfile"
 
 [http_service]
-internal_port = 8000
-force_https = true
-auto_stop_machines = true
-auto_start_machines = true
-min_machines_running = 0
-processes = ["app"]
-
-[[services.ports]]
-handlers = ["http"]
-port = 80
-force_https = true  # optional
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
