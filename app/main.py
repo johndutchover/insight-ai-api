@@ -1,14 +1,14 @@
 import os
-import marvin
 
+import marvin
+from app.routers import facts
+from app.routers import translate
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from marvin import ai_fn, ai_model, AIApplication
 from pydantic import BaseModel
 
-from app.routers import facts, translate
-
-load_dotenv()  # take environment variables from .env
+load_dotenv()
 
 app = FastAPI()
 
