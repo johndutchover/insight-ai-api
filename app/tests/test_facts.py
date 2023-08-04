@@ -13,4 +13,6 @@ def test_fact_for_number():
         assert response.status_code == 200
         assert isinstance(response.json(), Dict)
         assert str(n) in response.json()  # assuming the keys are strings
-        assert isinstance(response.json().get(str(n)), str)  # assuming the keys are strings
+        assert isinstance(
+            response.json().get(str(n)), str
+        )  # assuming the keys are strings
