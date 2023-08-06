@@ -1,7 +1,7 @@
 import os
 
 import marvin
-from app.routers import facts, translate
+from routers import facts, translate
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from marvin import ai_fn, ai_model, AIApplication
