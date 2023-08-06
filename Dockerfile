@@ -1,7 +1,7 @@
 # Use an official Python runtime as a parent image
 FROM python:3.11.4
 
-ENV PYTHONPATH "${PYTHONPATH}:/usr/src/app:/usr/src/app/tests"
+ENV PYTHONPATH "${PYTHONPATH}:/usr/src/app"
 
 # Set the working directory in the Docker image
 WORKDIR /usr/src/app
