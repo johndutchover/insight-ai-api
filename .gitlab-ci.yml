@@ -1,8 +1,5 @@
 default:
   image: python:3.11.4
-  cache:
-    paths:
-      - .cache/pip
 before_script:
   - apt-get update -qq && apt-get install -y curl
   - curl -L https://fly.io/install.sh | sh
@@ -13,7 +10,6 @@ before_script:
   - python -m venv .venv
 
 variables:
-  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
   PYTHONPATH: "$CI_PROJECT_DIR"
 
 stages:
@@ -29,10 +25,6 @@ install_dependencies:
     - pip install -r dev-requirements.txt
     - pip install -r requirements.txt
     - pip install pre-commit pytest
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    paths:
-      - .venv/
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
     - changes:
@@ -49,10 +41,6 @@ test:
   script:
     - source .venv/bin/activate
     - python -m pytest -v
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    paths:
-      - .venv/
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
     - changes:
