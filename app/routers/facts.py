@@ -26,7 +26,8 @@ def random_fact(n: int) -> dict[str, str]:
         n (int): The number for which a random fact is to be generated.
 
     Returns:
-        dict[str, str]: A dictionary with `n` as the key and the generated fact as the value.
+        dict[str, str]: A dictionary with `n` as the key and the
+         generated fact as the value.
     """
     fact = ...  # get the fact for `n`
     return {str(n): fact}

@@ -60,6 +60,11 @@ See Makefile command table below
 
 ### GitLab CI
 
+#### Settings
+
+- MARVIN_OPENAI_API_KEY
+- FLY_API_TOKEN
+
 #### .gitlab-ci.yml
 - stages
   - install
@@ -78,3 +83,5 @@ See Makefile command table below
 
 ##### .flake8
 - configuration for flake8
+
+### Fly

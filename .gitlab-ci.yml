@@ -1,15 +1,22 @@
-image: python:3.11
+default:
+  image: python:3.11.4
+before_script:
+  - apt-get update -qq && apt-get install -y curl
+  - curl -L https://fly.io/install.sh | sh
+  - export FLYCTL_INSTALL="/root/.fly"
+  - export PATH="$FLYCTL_INSTALL/bin:$PATH"
+  - python --version
+  - pip install virtualenv
+  - python -m venv .venv
+
+variables:
+  PYTHONPATH: "$CI_PROJECT_DIR"
 
 stages:
   - install
   - test
   - code_quality
   - deploy
-
-before_script:
-  - python --version
-  - pip install virtualenv
-  - virtualenv .venv
 
 install_dependencies:
   stage: install
@@ -18,14 +25,8 @@ install_dependencies:
     - pip install -r dev-requirements.txt
     - pip install -r requirements.txt
     - pip install pre-commit
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    paths:
-      - .venv/
   rules:
-    - changes:
-        - .gitlab-ci.yml
-      when: always
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
     - changes:
         - Makefile
         - dev-requirements.in
@@ -36,17 +37,11 @@ install_dependencies:
 
 test:
   stage: test
+  image: python:3.11.4
   script:
     - source .venv/bin/activate
-    - python -m pytest
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    paths:
-      - .venv/
   rules:
-    - changes:
-        - .gitlab-ci.yml
-      when: always
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
     - changes:
         - Makefile
         - dev-requirements.in
@@ -61,6 +56,8 @@ black:
     - source .venv/bin/activate
     - pip install pre-commit
     - pre-commit run black --all-files
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
 
 flake8:
   stage: code_quality
@@ -68,6 +65,8 @@ flake8:
     - source .venv/bin/activate
     - pip install pre-commit
     - pre-commit run flake8 --all-files
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
 
 bandit:
   stage: code_quality
@@ -75,23 +74,16 @@ bandit:
     - source .venv/bin/activate
     - pip install pre-commit
     - pre-commit run bandit --all-files
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
 
 deploy-prod:
   stage: deploy
   script:
     - echo "Deploy app from $CI_COMMIT_BRANCH branch"
-    - ./deploy.sh
+    - flyctl auth token $FLY_API_TOKEN
+    - flyctl deploy --ha=false --config app/fly.toml
   environment: production
   rules:
-    - changes:
-        - .gitlab-ci.yml
-      when: always
-    - changes:
-        - Makefile
-        - dev-requirements.in
-        - requirements.in
-        - pyproject.toml
-      when: never
-    - if: '$CI_COMMIT_BRANCH == "main"'
-      when: always
-    - when: on_success
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+    - when: manual

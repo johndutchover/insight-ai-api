@@ -1,4 +1,4 @@
-.PHONY: clean .venv update
+.PHONY: clean .venv update deploy
 
 # venv: Target to create and activate the virtual environment.
 venv: .venv/bin/activate
@@ -7,9 +7,12 @@ venv: .venv/bin/activate
 clean:
 	rm -rf .venv
 
+deploy:
+	flyctl deploy --ha=false --config app/fly.toml
+
 # .venv/bin/activate: Create a Python virtual environment and install required packages from "requirements.txt" and "dev-requirements.txt".
 .venv/bin/activate: requirements.txt dev-requirements.txt
-	test -d .venv || python3 -m venv .venv
+	test -d .venv || python -m venv .venv
 	. .venv/bin/activate; pip install -U pip setuptools wheel
 	. .venv/bin/activate; pip install -r dev-requirements.txt; pip install -r requirements.txt
 	touch .venv/bin/activate
