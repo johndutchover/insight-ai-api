@@ -14,11 +14,12 @@ before_script:
   - python --version
   - pip install virtualenv
   - python -m venv .venv
+  - source .venv/bin/activate
 
 install_dependencies:
   stage: install
   script:
-    - . .venv/bin/activate
+    - source .venv/bin/activate
     - pip install -r dev-requirements.txt
     - pip install -r requirements.txt
     - pip install pre-commit
@@ -41,7 +42,7 @@ install_dependencies:
 test:
   stage: test
   script:
-    - . .venv/bin/activate
+    - source .venv/bin/activate
     - python -m pytest
   cache:
     key: "$CI_COMMIT_REF_NAME"
@@ -62,21 +63,21 @@ test:
 black:
   stage: code_quality
   script:
-    - . .venv/bin/activate
+    - source .venv/bin/activate
     - pip install pre-commit
     - pre-commit run black --all-files
 
 flake8:
   stage: code_quality
   script:
-    - . .venv/bin/activate
+    - source .venv/bin/activate
     - pip install pre-commit
     - pre-commit run flake8 --all-files
 
 bandit:
   stage: code_quality
   script:
-    - . .venv/bin/activate
+    - source .venv/bin/activate
     - pip install pre-commit
     - pre-commit run bandit --all-files
 
