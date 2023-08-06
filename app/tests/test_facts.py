@@ -16,3 +16,9 @@ def test_fact_for_number():
         assert isinstance(
             response.json().get(str(n)), str
         )  # assuming the keys are strings
+
+
+def test_random_fact():
+    response = client.get("/facts/random_fact")
+    assert response.status_code == 200
+    assert isinstance(response.json(), str)
