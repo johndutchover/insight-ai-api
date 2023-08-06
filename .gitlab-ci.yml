@@ -1,7 +1,7 @@
 default:
   image: python:3.11.4
-  cache:                      # Pip's cache doesn't store the python packages
-    paths:                    # https://pip.pypa.io/en/stable/topics/caching/
+  cache:
+    paths:
       - .cache/pip
 before_script:
   - apt-get update -qq && apt-get install -y curl
@@ -12,7 +12,7 @@ before_script:
   - pip install virtualenv
   - python -m venv .venv
 
-variables:  # Change pip's cache directory to be inside the project directory since we can only cache local items.
+variables:
   PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
   PYTHONPATH: "$CI_PROJECT_DIR"
 
@@ -34,9 +34,7 @@ install_dependencies:
     paths:
       - .venv/
   rules:
-    - changes:
-        - .gitlab-ci.yml
-      when: always
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
     - changes:
         - Makefile
         - dev-requirements.in
@@ -55,9 +53,7 @@ test:
     paths:
       - .venv/
   rules:
-    - changes:
-        - .gitlab-ci.yml
-      when: always
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
     - changes:
         - Makefile
         - dev-requirements.in
@@ -72,6 +68,8 @@ black:
     - source .venv/bin/activate
     - pip install pre-commit
     - pre-commit run black --all-files
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
 
 flake8:
   stage: code_quality
@@ -79,6 +77,8 @@ flake8:
     - source .venv/bin/activate
     - pip install pre-commit
     - pre-commit run flake8 --all-files
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
 
 bandit:
   stage: code_quality
@@ -86,6 +86,8 @@ bandit:
     - source .venv/bin/activate
     - pip install pre-commit
     - pre-commit run bandit --all-files
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
 
 deploy-prod:
   stage: deploy
@@ -96,14 +98,4 @@ deploy-prod:
   environment: production
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
-      when: always
-    - changes:
-        - .gitlab-ci.yml
-      when: never
-    - changes:
-        - Makefile
-        - dev-requirements.in
-        - requirements.in
-        - pyproject.toml
-      when: never
     - when: manual
