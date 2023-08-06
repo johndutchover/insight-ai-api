@@ -85,20 +85,19 @@ deploy-prod:
   stage: deploy
   script:
     - echo "Deploy app from $CI_COMMIT_BRANCH branch"
-    - env | grep FLY_API_TOKEN
     - flyctl auth token $FLY_API_TOKEN
     - flyctl deploy --ha=false --config app/fly.toml
   environment: production
   rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+      when: always
     - changes:
         - .gitlab-ci.yml
-      when: always
+      when: never
     - changes:
         - Makefile
         - dev-requirements.in
         - requirements.in
         - pyproject.toml
       when: never
-    - if: '$CI_COMMIT_BRANCH == "main"'
-      when: always
-    - when: on_success
+    - when: manual
