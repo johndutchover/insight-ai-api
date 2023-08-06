@@ -1,11 +1,8 @@
-image: python:3.11.4
-
-stages:
-  - install
-  - test
-  - code_quality
-  - deploy
-
+default:
+  image: python:3.11.4
+  cache:                      # Pip's cache doesn't store the python packages
+    paths:                    # https://pip.pypa.io/en/stable/topics/caching/
+      - .cache/pip
 before_script:
   - apt-get update -qq && apt-get install -y curl
   - curl -L https://fly.io/install.sh | sh
@@ -15,6 +12,15 @@ before_script:
   - pip install virtualenv
   - python -m venv .venv
   - source .venv/bin/activate
+
+variables:  # Change pip's cache directory to be inside the project directory since we can only cache local items.
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+stages:
+  - install
+  - test
+  - code_quality
+  - deploy
 
 install_dependencies:
   stage: install
