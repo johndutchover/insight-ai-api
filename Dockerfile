@@ -1,13 +1,14 @@
 # Use an official Python runtime as a parent image
 FROM python:3.11.4
 
-ENV PYTHONPATH "${PYTHONPATH}:/usr/src/app"
+ENV PYTHONPATH "${PYTHONPATH}:/usr/src/app:/usr/src/app/tests"
 
 # Set the working directory in the Docker image
 WORKDIR /usr/src/app
 
 # Copy the app directory contents into the container at /usr/src/app
 COPY app/ .
+COPY app/tests .
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
