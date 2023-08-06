@@ -14,6 +14,9 @@ def test_fact_for_number():
 
     for n in test_values:
         response = client.post(f"/facts/fact_for_number?n={n}")
+        print(response.status_code)
+        print(response.json())
+
         assert response.status_code == 200
         assert isinstance(response.json(), Dict)
         assert str(n) in response.json()  # assuming the keys are strings
