@@ -58,9 +58,9 @@ class Person(BaseModel):
     last_name: str
 
 
-app.add_api_route("/generate_fruits", generate_fruits)
-app.add_api_route("/generate_vegetables", generate_vegetables)
-app.add_api_route("/person/extract", Person.route())
+# app.add_api_route("/generate_fruits", generate_fruits)
+# app.add_api_route("/generate_vegetables", generate_vegetables)
+# app.add_api_route("/person/extract", Person.route())
 
 if __name__ == "__main__":
     import uvicorn
