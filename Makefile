@@ -17,13 +17,13 @@ deploy:
 	. .venv/bin/activate; pip install -r dev-requirements.txt; pip install -r requirements.txt
 	touch .venv/bin/activate
 
-# dev-requirements.txt: Generate "dev-requirements.txt" by compiling "dev-requirements.in".
-dev-requirements.txt: dev-requirements.in
-	pip-compile dev-requirements.in
-
-# requirements.txt: Generate "requirements.txt" by compiling "requirements.in".
+# Generate "dev-requirements.txt" inside "app/" by compiling "dev-requirements.in".
 requirements.txt: requirements.in
-	pip-compile requirements.in
+	pip-compile requirements.in -o app/requirements.txt
+
+# Generate "requirements.txt" inside "app/" by compiling "requirements.in".
+dev-requirements.txt: dev-requirements.in
+	pip-compile dev-requirements.in -o app/dev-requirements.txt
 
 # compile-requirements: Regenerate "requirements.txt" using "pip-compile".
 compile-requirements: requirements.txt
