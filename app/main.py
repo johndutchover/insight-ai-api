@@ -47,35 +47,12 @@ async def read_root(n: int = 10, color: str = "blue"):
 @ai_fn
 def generate_fruits(n: int) -> list[str]:
     """Generates a list of `n` fruits"""
-    sample_fruits = [
-        "apple",
-        "banana",
-        "cherry",
-        "date",
-        "elderberry",
-        "fig",
-        "grape",
-        "honeydew",
-        "kiwi",
-        "lemon",
-    ]
-    return sample_fruits[:n]
 
 
 @app.get("/generate_vegetables")
 @ai_fn
 def generate_vegetables(n: int, color: str) -> list[str]:
     """Generates a list of `n` vegetables of color `color`"""
-
-    all_vegetables = {
-        "green": ["broccoli", "spinach", "green beans", "zucchini"],
-        "red": ["tomato", "red bell pepper", "radish", "beet"],
-        "orange": ["carrot", "butternut squash", "sweet potato", "pumpkin"],
-        # ... you can add more colors and vegetables
-    }
-
-    selected_vegetables = all_vegetables.get(color, [])
-    return selected_vegetables[:n]
 
 
 @ai_model
