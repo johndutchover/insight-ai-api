@@ -108,7 +108,6 @@ typing-extensions==4.7.1
     # via
     #   fastapi
     #   pydantic
-    #   pydantic-core
     #   typer
 tzdata==2023.3
     # via marvin
