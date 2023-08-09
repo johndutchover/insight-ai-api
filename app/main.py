@@ -1,11 +1,12 @@
 import os
 
 import marvin
-from routers import facts, translate
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from marvin import ai_fn, ai_model, AIApplication
 from pydantic import BaseModel
+
+from routers import facts, translate
 
 load_dotenv()
 
@@ -42,11 +43,13 @@ async def read_root(n: int = 10, color: str = "blue"):
 
 
 # https://www.askmarvin.ai/deployment/#fastapi
+@app.get("/generate_fruits")
 @ai_fn
 def generate_fruits(n: int) -> list[str]:
     """Generates a list of `n` fruits"""
 
 
+@app.get("/generate_vegetables")
 @ai_fn
 def generate_vegetables(n: int, color: str) -> list[str]:
     """Generates a list of `n` vegetables of color `color`"""
@@ -57,10 +60,6 @@ class Person(BaseModel):
     first_name: str
     last_name: str
 
-
-app.add_api_route("/generate_fruits", generate_fruits)
-app.add_api_route("/generate_vegetables", generate_vegetables)
-app.add_api_route("/person/extract", Person.route())
 
 if __name__ == "__main__":
     import uvicorn
