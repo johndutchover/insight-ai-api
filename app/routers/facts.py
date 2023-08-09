@@ -18,7 +18,7 @@ marvin.settings.openai.api_key = marvin_openai_api_key
 
 @router.post("/fact_for_number")
 @ai_fn
-def random_fact(n: int) -> dict[str, str]:
+def random_fact(n: int) -> dict[int, str]:
     """
     Get a random fact for `n` and return it in a dictionary with `n` as the key.
 
@@ -26,8 +26,6 @@ def random_fact(n: int) -> dict[str, str]:
         n (int): The number for which a random fact is to be generated.
 
     Returns:
-        dict[str, str]: A dictionary with `n` as the key and the
+        dict[int, str]: A dictionary with `n` as the key and the
          generated fact as the value.
     """
-    fact = ...  # get the fact for `n`
-    return {str(n): fact}
