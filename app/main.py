@@ -37,11 +37,11 @@ insight_app = AIApplication(
 
 
 @app.get("/")
-def read_root(n: int = 10, color: str = "blue"):
+async def read_root(n: int = 10, color: str = "blue"):
     return {"n": n, "color": color}
 
 
-# https://www.askmarvin.ai/deployment/
+# https://www.askmarvin.ai/deployment/#fastapi
 @ai_fn
 def generate_fruits(n: int) -> list[str]:
     """Generates a list of `n` fruits"""
@@ -58,9 +58,9 @@ class Person(BaseModel):
     last_name: str
 
 
-# app.add_api_route("/generate_fruits", generate_fruits)
-# app.add_api_route("/generate_vegetables", generate_vegetables)
-# app.add_api_route("/person/extract", Person.route())
+app.add_api_route("/generate_fruits", generate_fruits)
+app.add_api_route("/generate_vegetables", generate_vegetables)
+app.add_api_route("/person/extract", Person.route())
 
 if __name__ == "__main__":
     import uvicorn
