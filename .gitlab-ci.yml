@@ -22,8 +22,8 @@ install_dependencies:
   stage: install
   script:
     - source .venv/bin/activate
-    - pip install -r dev-requirements.txt
-    - pip install -r requirements.txt
+    - pip install -r app/dev-requirements.txt
+    - pip install -r app/requirements.txt
     - pip install pre-commit
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
