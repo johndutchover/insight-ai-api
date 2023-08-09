@@ -36,7 +36,7 @@ compile: compile-requirements compile-dev-requirements
 
 # sync: Synchronize the virtual environment with the packages listed in "requirements.txt" and "dev-requirements.txt".
 sync:
-	@pip-sync requirements.txt dev-requirements.txt
+	@pip-sync app/requirements.txt app/dev-requirements.txt
 
 # update: Regenerate both files and sync the virtual environment with the latest dependencies.
 update: compile sync
