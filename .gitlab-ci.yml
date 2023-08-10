@@ -85,12 +85,17 @@ bandit:
     - when: always
 
 checkmake:
-  image: python:3.11.4
+  image: ubuntu:jammy
   stage: code_quality
   script:
     - source .venv/bin/activate
+    - apt-get install -y golang-go
+    - export GOROOT=/usr/local/go
+    - export GOPATH=$HOME/go
+    - export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+    - go version
     - pip install pre-commit
-    - pre-commit run checkmake --all-files
+    - pre-commit run --all-files
   rules:
     - if: '$CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH == "main"'
     - changes:
@@ -99,7 +104,6 @@ checkmake:
         - 'GNUmakefile'
         - '**.mk'
         - '**.make'
-        - '.pre-commit-config.yaml'
       when: always
 
 deploy-prod:
