@@ -1,4 +1,4 @@
-.PHONY: clean venv update deploy compile-requirements compile-dev-requirements compile sync
+.PHONY: clean venv update deploy compile-requirements compile-dev-requirements compile sync all test
 
 # Target to create and activate the virtual environment.
 venv: app/requirements.txt app/dev-requirements.txt
