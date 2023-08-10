@@ -21,7 +21,6 @@ variables:
 stages:
   - install
   - test
-  - linting
   - code_quality
   - deploy
 
@@ -55,6 +54,24 @@ test:
       when: never
     - when: always
 
+mega-linter:
+  stage: test
+  # You can override MegaLinter flavor used to have faster performances
+  # More info at https://megalinter.io/flavors/
+  image: oxsecurity/megalinter:v7
+  script: [ "true" ] # if script: ["true"] doesn't work, you may try ->  script: [ "/bin/bash /entrypoint.sh" ]
+  variables:
+    # All available variables are described in documentation
+    # https://megalinter.io/configuration/
+    DEFAULT_WORKSPACE: $CI_PROJECT_DIR
+    # ADD YOUR CUSTOM ENV VARIABLES HERE TO OVERRIDE VALUES OF .mega-linter.yml AT THE ROOT OF YOUR REPOSITORY
+    ENABLE_LINTERS: MAKEFILE_CHECKMAKE
+  artifacts:
+    when: always
+    paths:
+      - megalinter-reports
+    expire_in: 1 week
+
 black:
   stage: code_quality
   script:
@@ -84,37 +101,6 @@ bandit:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
     - when: always
-
-checkmake:
-  image: golang:1.20.7
-  stage: linting
-  script:
-    # Install Python and pip
-    - apt-get update
-    - apt-get install -y python3 python3-pip
-    - python3 -m pip install --upgrade pip
-
-    # Install pre-commit using pip
-    - python3 -m pip install pre-commit
-
-    # Setup Go environment (may be redundant given you're using a Go image)
-    - export GOROOT=/usr/local/go
-    - export GOPATH=$HOME/go
-    - export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-    - go version
-
-    # Run pre-commit checks
-    - pre-commit run --all-files
-
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH == "main"'
-    - changes:
-        - 'Makefile'
-        - 'makefile'
-        - 'GNUmakefile'
-        - '**.mk'
-        - '**.make'
-      when: always
 
 deploy-prod:
   stage: deploy
