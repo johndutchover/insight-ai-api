@@ -48,8 +48,10 @@ See Makefile command table below
 
 | Make command                    | Purpose                                                                                 |
 |---------------------------------|-----------------------------------------------------------------------------------------|
-| `make .venv/bin/activate`       | Create a Python virtual environment and install required packages"                      |
 | `make venv`                     | Target to create and activate the virtual environment                                   |
+| `make clean`                    | Destructive. Used to remove .venv/                                                      |
+| `make deploy`                   | Deploy app to fly.io                                                                    |
+| `make .venv/bin/activate`       | Create a Python virtual environment and install required packages"                      |
 | `make requirements.txt`         | Generate "requirements.txt" by compiling "requirements.in"                              |
 | `make dev-requirements.txt`     | Generate "dev-requirements.txt" by compiling "dev-requirements.in"                      |
 | `make compile-requirements`     | Regenerate "requirements.txt" using "pip-compile"                                       |
@@ -62,8 +64,14 @@ See Makefile command table below
 
 #### Settings
 
+##### CI/CD
+
+##### Variables
+
 - MARVIN_OPENAI_API_KEY
+  - attributes: masked, expanded
 - FLY_API_TOKEN
+    - attributes: masked, expanded
 
 #### .gitlab-ci.yml
 - stages
@@ -71,7 +79,7 @@ See Makefile command table below
   - test
   - code_quality
   - deploy
-    - uses `deploy.sh`
+    - uses `flyctl`
 
 #### .pre-commit-config.yaml
 - pre-commit-hooks
@@ -85,3 +93,4 @@ See Makefile command table below
 - configuration for flake8
 
 ### Fly
+- app/fly.toml

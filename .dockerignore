@@ -229,7 +229,7 @@ site
 **/*.lnk
 
 ### Custom ###
-**/*.tfplan
+cli/*
 # End of file
 
 # flyctl launch added from .idea/.gitignore

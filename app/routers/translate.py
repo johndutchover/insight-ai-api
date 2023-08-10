@@ -1,14 +1,10 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
+from marvin import ai_fn
 
 router = APIRouter()
 
 
-class TranslationInput(BaseModel):
-    text: str
-
-
-@router.post("/")
-def translate_german(data: TranslationInput):
-    """Get a German response"""
-    return {"translation": "Guten Tag"}
+@router.post("/translate")
+@ai_fn
+def translate_german(text: str) -> str:
+    """Translate `text` to German"""
