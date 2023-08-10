@@ -22,7 +22,6 @@ stages:
   - install
   - test
   - code_quality
-  - pre-commit
   - deploy
 
 install_dependencies:
@@ -85,25 +84,22 @@ bandit:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
     - when: always
 
-pre-commit:
-  image: golang:1.21.0-bookworm
-  stage: pre-commit
+checkmake:
+  image: python:3.11.4
+  stage: code_quality
   script:
     - source .venv/bin/activate
-    - go version
     - pip install pre-commit
-    - pre-commit run --all-files
+    - pre-commit run checkmake --all-files
   rules:
     - if: '$CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH == "main"'
     - changes:
-        - '.gitlab-ci.yml'
-        - '.pre-commit-config.yaml'
-        - '.pre-commit-hooks.yaml'
         - 'Makefile'
         - 'makefile'
         - 'GNUmakefile'
         - '**.mk'
         - '**.make'
+        - '.pre-commit-config.yaml'
       when: always
 
 deploy-prod:
