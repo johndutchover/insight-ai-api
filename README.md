@@ -24,27 +24,17 @@ Set Python version using pyenv
 `pyenv local 3.11.4`
 - writes to `.python-version`
 
-### Create virtualenv
+### Initialize virtualenv
 
 From repository root:
-1. `python -m venv .venv`
+1. `make venv`
 2. `source .venv/bin/activate`
-3. `pip install pip-tools`
-4. `pip install --upgrade pip`
-5. `make venv`
 
 ### Dependency management
 
-#### pip-tools
-
-- `pip-compile requirements.in` will generate a requirments.txt file with all the dependencies in requirements.in
-  - `pip-compile dev-requirements.in` will generate a dev-requirments.txt file with dependencies in dev-requirements.in
-- `pip-sync requirements.txt` will install all the package listed in the requirments.txt file
-  - `pip-sync dev-requirements.txt` will install all the package listed in the dev-requirments.txt file
-
 #### Makefile
 
-See Makefile command table below
+Makefile command table
 
 | Make command                    | Purpose                                                                     |
 |---------------------------------|-----------------------------------------------------------------------------|
