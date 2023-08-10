@@ -3,7 +3,7 @@
 [![pipeline status](https://gitlab.com/johndutchover/insight-ai-api/badges/main/pipeline.svg)](https://gitlab.com/johndutchover/insight-ai-api/-/commits/main)
 [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
 [![Latest Release](https://gitlab.com/johndutchover/insight-ai-api/-/badges/release.svg)](https://gitlab.com/johndutchover/insight-ai-api/-/releases)
-[![MegaLinter](https://gitlab.com/johndutchover/insight-ai-api/workflows/MegaLinter/badge.svg?branch=main)](https://github.com/johndutchover/insight-ai-api/actions?query=workflow%3AMegaLinter+branch%3Amain)
+[![MegaLinter](https://gitlab.com/johndutchover/insight-ai-api/workflows/MegaLinter/badge.svg?branch=main)](https://gitlab.com/johndutchover/insight-ai-api/actions?query=workflow%3AMegaLinter+branch%3Amain)
 
 
 ## About
