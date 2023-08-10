@@ -46,19 +46,18 @@ From repository root:
 
 See Makefile command table below
 
-| Make command                    | Purpose                                                                                 |
-|---------------------------------|-----------------------------------------------------------------------------------------|
-| `make venv`                     | Target to create and activate the virtual environment                                   |
-| `make clean`                    | Destructive. Used to remove .venv/                                                      |
-| `make deploy`                   | Deploy app to fly.io                                                                    |
-| `make .venv/bin/activate`       | Create a Python virtual environment and install required packages"                      |
-| `make requirements.txt`         | Generate "requirements.txt" by compiling "requirements.in"                              |
-| `make dev-requirements.txt`     | Generate "dev-requirements.txt" by compiling "dev-requirements.in"                      |
-| `make compile-requirements`     | Regenerate "requirements.txt" using "pip-compile"                                       |
-| `make compile-dev-requirements` | Regenerate "dev-requirements.txt" using "pip-compile"                                   |
-| `make compile`                  | Regenerate both "requirements.txt" and "dev-requirements.txt"                           |
-| `make sync`                     | Sync virtual environment with "requirements.txt" and "dev-requirements.txt"             |
-| `make update`                   | Regenerate .in and .txt files and sync virtual environment with the latest dependencies |
+| Make command                    | Purpose                                                                     |
+|---------------------------------|-----------------------------------------------------------------------------|
+| `make venv`                     | Target to create and activate the virtual environment                       |
+| `make clean`                    | Remove Python file artifacts and the virtual environment                    |
+| `make deploy`                   | Deploy app using flyctl                                                     |
+| `make app/requirements.txt`     | Generate "app/requirements.txt" by compiling "requirements.in"              |
+| `make app/dev-requirements.txt` | Generate "app/dev-requirements.txt" by compiling "dev-requirements.in"      |
+| `make compile-requirements`     | Regenerate "app/requirements.txt" using "pip-compile"                       |
+| `make compile-dev-requirements` | Regenerate "app/dev-requirements.txt" using "pip-compile"                   |
+| `make compile`                  | Regenerate both "app/requirements.txt" and "app/dev-requirements.txt"       |
+| `make sync`                     | Synchronize the virtual environment with the packages listed                |
+| `make update`                   | Update both files and sync the virtual environment with latest dependencies |
 
 ### GitLab CI
 
