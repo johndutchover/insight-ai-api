@@ -1,3 +1,9 @@
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
+      when: always
+    - when: never
+
 default:
   image: python:3.11.4
 before_script:
@@ -26,14 +32,13 @@ install_dependencies:
     - pip install -r app/requirements.txt
     - pip install pre-commit
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
     - changes:
         - Makefile
         - dev-requirements.in
         - requirements.in
         - pyproject.toml
       when: never
-    - when: on_success
+    - when: always
 
 test:
   stage: test
@@ -41,14 +46,31 @@ test:
   script:
     - source .venv/bin/activate
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
     - changes:
         - Makefile
         - dev-requirements.in
         - requirements.in
         - pyproject.toml
       when: never
-    - when: on_success
+    - when: always
+
+mega-linter:
+  stage: test
+  # You can override MegaLinter flavor used to have faster performances
+  # More info at https://megalinter.io/flavors/
+  image: oxsecurity/megalinter-ci_light:v7.3.0
+  script: [ "true" ] # if script: ["true"] doesn't work, you may try ->  script: [ "/bin/bash /entrypoint.sh" ]
+  variables:
+    # All available variables are described in documentation
+    # https://megalinter.io/configuration/
+    DEFAULT_WORKSPACE: $CI_PROJECT_DIR
+    # ADD YOUR CUSTOM ENV VARIABLES HERE TO OVERRIDE VALUES OF .mega-linter.yml AT THE ROOT OF YOUR REPOSITORY
+    ENABLE_LINTERS: MAKEFILE_CHECKMAKE
+  artifacts:
+    when: always
+    paths:
+      - megalinter-reports
+    expire_in: 1 week
 
 black:
   stage: code_quality
@@ -58,6 +80,7 @@ black:
     - pre-commit run black --all-files
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
+    - when: always
 
 flake8:
   stage: code_quality
@@ -67,6 +90,7 @@ flake8:
     - pre-commit run flake8 --all-files
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
+    - when: always
 
 bandit:
   stage: code_quality
@@ -76,6 +100,7 @@ bandit:
     - pre-commit run bandit --all-files
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
+    - when: always
 
 deploy-prod:
   stage: deploy

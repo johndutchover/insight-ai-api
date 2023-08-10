@@ -1,42 +1,37 @@
-.PHONY: clean .venv update deploy
+.PHONY: clean venv update deploy compile-requirements compile-dev-requirements compile sync all test
 
-# venv: Target to create and activate the virtual environment.
-venv: .venv/bin/activate
+# Target to create and activate the virtual environment.
+venv: app/requirements.txt app/dev-requirements.txt
+	test -d .venv || python3.11 -m venv .venv
+	. .venv/bin/activate; pip install -U pip setuptools wheel
+	. .venv/bin/activate; pip install -r app/requirements.txt; pip install -r app/dev-requirements.txt
+	touch .venv/bin/activate
 
-# clean: Remove the virtual environment directory ".venv" and its contents.
+# Remove Python file artifacts and the virtual environment.
 clean:
 	rm -rf .venv
+	find . -name '*.pyc' -exec rm -f {} +
+	find . -name '*.pyo' -exec rm -f {} +
+	find . -name '__pycache__' -exec rm -fr {} +
 
+# Deploy using flyctl.
 deploy:
 	flyctl deploy --ha=false --config app/fly.toml
 
-# .venv/bin/activate: Create a Python virtual environment and install required packages from "requirements.txt" and "dev-requirements.txt".
-.venv/bin/activate: requirements.txt dev-requirements.txt
-	test -d .venv || python -m venv .venv
-	. .venv/bin/activate; pip install -U pip setuptools wheel
-	. .venv/bin/activate; pip install -r dev-requirements.txt; pip install -r requirements.txt
-	touch .venv/bin/activate
-
-# Generate "dev-requirements.txt" inside "app/" by compiling "dev-requirements.in".
-requirements.txt: requirements.in
+# Regenerate "app/requirements.txt" using "pip-compile".
+app/requirements.txt: requirements.in
 	pip-compile requirements.in -o app/requirements.txt
 
-# Generate "requirements.txt" inside "app/" by compiling "requirements.in".
-dev-requirements.txt: dev-requirements.in
+# Regenerate "app/dev-requirements.txt" using "pip-compile".
+app/dev-requirements.txt: dev-requirements.in
 	pip-compile dev-requirements.in -o app/dev-requirements.txt
 
-# compile-requirements: Regenerate "requirements.txt" using "pip-compile".
-compile-requirements: requirements.txt
+# Regenerate both "app/requirements.txt" and "app/dev-requirements.txt".
+compile: app/requirements.txt app/dev-requirements.txt
 
-# compile-dev-requirements: Regenerate "dev-requirements.txt" using "pip-compile".
-compile-dev-requirements: dev-requirements.txt
-
-# compile: Regenerate both "requirements.txt" and "dev-requirements.txt".
-compile: compile-requirements compile-dev-requirements
-
-# sync: Synchronize the virtual environment with the packages listed in "requirements.txt" and "dev-requirements.txt".
+# Synchronize the virtual environment with the packages listed.
 sync:
 	@pip-sync app/requirements.txt app/dev-requirements.txt
 
-# update: Regenerate both files and sync the virtual environment with the latest dependencies.
+# Update both files and sync the virtual environment with latest dependencies.
 update: compile sync
