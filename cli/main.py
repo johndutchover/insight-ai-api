@@ -26,12 +26,9 @@ def fetch_data(endpoint: str):
 @app.command()
 def get_random_fact(n: int):
     """
-    Fetch data from the insight-ai-api endpoint.
-
-    Args:
-    - endpoint (str): The endpoint to fetch data from. Example: "data/123"
+    Generate a random fact for a given number.
+     :param n:
     """
-
     endpoint = f"facts/fact_for_number?n={n}"
     try:
         data = fetch_data(endpoint)
