@@ -86,7 +86,7 @@ bandit:
     - when: always
 
 pre-commit:
-  image: golang:1.21.0-alpine3.18
+  image: golang:1.21.0-bookworm
   stage: pre-commit
   script:
     - source .venv/bin/activate
@@ -96,6 +96,7 @@ pre-commit:
   rules:
     - if: '$CI_COMMIT_BRANCH == "master" || $CI_COMMIT_BRANCH == "main"'
     - changes:
+        - '.gitlab-ci.yml'
         - '.pre-commit-config.yaml'
         - '.pre-commit-hooks.yaml'
         - 'Makefile'
