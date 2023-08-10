@@ -2,7 +2,7 @@
 
 # Target to create and activate the virtual environment.
 venv: app/requirements.txt app/dev-requirements.txt
-	test -d .venv || python -m venv .venv
+	test -d .venv || python3.11 -m venv .venv
 	. .venv/bin/activate; pip install -U pip setuptools wheel
 	. .venv/bin/activate; pip install -r app/requirements.txt; pip install -r app/dev-requirements.txt
 	touch .venv/bin/activate
