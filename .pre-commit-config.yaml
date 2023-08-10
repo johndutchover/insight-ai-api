@@ -35,3 +35,11 @@ repos:
         entry: conventional-pre-commit
         language: python
         stages: [commit-msg]
+
+  - repo: https://github.com/mrtazz/checkmake.git
+    rev: 0.2.2
+    hooks:
+      # Use this hook to let pre-commit build checkmake in its sandbox
+      - id: checkmake
+    # OR Use this hook to use a pre-installed checkmark executable
+    # -   id: checkmake-system
