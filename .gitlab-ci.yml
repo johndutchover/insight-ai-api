@@ -85,7 +85,7 @@ bandit:
     - when: always
 
 checkmake:
-  image: ubuntu:jammy
+  image: golang:1.20.7
   stage: code_quality
   script:
     - source .venv/bin/activate
