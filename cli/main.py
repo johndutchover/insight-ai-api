@@ -54,41 +54,5 @@ def translate_to_german(word: str):
         typer.echo(f"Error fetching data: {e}")
 
 
-# @app.command()
-# def translate_to_german(word: str):
-#     """
-#     Fetch data from the insight-ai-api endpoint.
-#
-#     Args:
-#     - endpoint (str): The endpoint to fetch data from. Example: "data/123"
-#     """
-#     headers = {
-#         "accept": "application/json",
-#         "Content-Type": "application/json"
-#     }
-#     endpoint = f"translate?text={word}"
-#     data = {
-#         "text": word
-#     }
-#     url = BASE_URL + endpoint
-#     logging.info(f"{url=}")
-#     headers = {"Accept": "application/json"}
-#
-#     response = requests.post(url, headers=headers, json=data)
-#
-#     if response.status_code == 200:
-#         return response.json()
-#     else:
-#         logging.info(response.text)
-#         response.raise_for_status()
-#
-#
-#     try:
-#         data = fetch_data(endpoint)
-#         typer.echo(data)
-#     except requests.RequestException as e:
-#         typer.echo(f"Error fetching data: {e}")
-
-
 if __name__ == "__main__":
     app()
