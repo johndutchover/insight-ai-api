@@ -1,3 +1,9 @@
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
+      when: always
+    - when: never
+
 default:
   image: python:3.11.4
 before_script:
@@ -27,14 +33,13 @@ install_dependencies:
     - pip install -r app/requirements.txt
     - pip install pre-commit
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
     - changes:
         - Makefile
         - dev-requirements.in
         - requirements.in
         - pyproject.toml
       when: never
-    - when: on_success
+    - when: always
 
 test:
   stage: test
@@ -42,14 +47,13 @@ test:
   script:
     - source .venv/bin/activate
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
     - changes:
         - Makefile
         - dev-requirements.in
         - requirements.in
         - pyproject.toml
       when: never
-    - when: on_success
+    - when: always
 
 black:
   stage: code_quality
@@ -59,6 +63,7 @@ black:
     - pre-commit run black --all-files
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
+    - when: always
 
 flake8:
   stage: code_quality
@@ -68,6 +73,7 @@ flake8:
     - pre-commit run flake8 --all-files
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
+    - when: always
 
 bandit:
   stage: code_quality
@@ -77,9 +83,10 @@ bandit:
     - pre-commit run bandit --all-files
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
+    - when: always
 
 pre-commit:
-  image: golang:latest  # This image has Go pre-installed
+  image: golang:1.21.0-alpine3.18
   stage: pre-commit
   script:
     - source .venv/bin/activate
