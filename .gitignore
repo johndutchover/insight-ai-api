@@ -230,3 +230,4 @@ $RECYCLE.BIN/
 ### Custom ###
 *.tfplan
 # End of file
+/frontend/venv-frontend/share/
