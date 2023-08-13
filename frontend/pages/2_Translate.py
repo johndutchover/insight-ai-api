@@ -9,9 +9,7 @@ def translate_german(text):
     response = requests.post(api_url, headers=headers, data="", timeout=5)
 
     if response.status_code == 200:
-        return response.json().get(
-            "translation", ""
-        )  # Adjust as needed based on API response structure
+        return response.json().get("translation", "")
     else:
         st.error("Failed to translate the text.")
         return ""
@@ -23,8 +21,7 @@ def translate_english(text):
 
 st.title("Translators")
 
-# This code has a filename of 2_Translate.py and is written in Python.
-
+# Check for the translation button click
 if st.button("German to English"):
     user_input = st.text_input("Enter the German word you want to translate:")
     if user_input:
@@ -32,5 +29,7 @@ if st.button("German to English"):
         st.write(f"Translation: {translation}")
     else:
         st.write("Please enter a word to translate.")
-else:
+
+# Check for the home button click
+if st.button("Home"):
     switch_page("Home")
