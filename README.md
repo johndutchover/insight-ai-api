@@ -43,7 +43,8 @@ Makefile command table
 
 | Make command                    | Purpose                                                                     |
 |---------------------------------|-----------------------------------------------------------------------------|
-| `make venv`                     | Target to create and activate the virtual environment                       |
+| `make venv`                     | Target to create and activate the backend virtual environment               |
+| `make fe-venv`                  | Target to create and activate the frontend virtual environment              |
 | `make clean`                    | Remove Python file artifacts and the virtual environment                    |
 | `make deploy`                   | Deploy app using flyctl                                                     |
 | `make app/requirements.txt`     | Generate "app/requirements.txt" by compiling "requirements.in"              |
