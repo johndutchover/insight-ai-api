@@ -253,4 +253,4 @@ app/.pytest_cache/**/*
 # flyctl launch added from tests/.pytest_cache/.gitignore
 # Created by pytest automatically.
 tests/.pytest_cache/**/v
-app/fly.toml
+fly.toml
