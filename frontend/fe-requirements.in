@@ -2,3 +2,4 @@
 python-dotenv
 streamlit
 streamlit_extras
+watchdog
