@@ -1,21 +1,9 @@
 import os
-import sys
-import pathlib
 import streamlit as st
 from dotenv import load_dotenv
 from streamlit_extras.switch_page_button import switch_page
 
-# Path to the virtual environment
-venv_path = pathlib.Path("venv-frontend/bin/activate")
-
-# Modify the PATH environment variable to include the venv
-os.environ["PATH"] = str(venv_path) + os.pathsep + os.environ["PATH"]
-
-# Modify the system path to include the venv
-sys.path.insert(0, str(venv_path))
-
-env_path = pathlib.Path(__file__).parent / ".env"
-load_dotenv(env_path)
+load_dotenv(".env")
 
 
 # Check password function
@@ -38,4 +26,4 @@ if check_password():
     # Set a flag in the session state to indicate that the password is correct
     st.session_state["password_correct"] = True
     # Redirect using extras switch_page
-    switch_page("app")
+    switch_page("Home")
