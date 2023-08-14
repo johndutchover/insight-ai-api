@@ -29,6 +29,7 @@
 **/**/.ssh/*_id_*
 
 # Secrets
-**/.streamlit
+.streamlit
+.env
 
 # End of file
