@@ -18,7 +18,7 @@ def translate_eng_de(text):
 
 st.title("Translators")
 
-user_input = st.text_area("Enter the English word you want to translate:")
+user_input = st.text_area("Enter the English text to translate to German:")
 
 if st.button("Translate to German"):
     if user_input:
