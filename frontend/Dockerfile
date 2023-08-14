@@ -3,7 +3,6 @@ WORKDIR /client
 ENV PYTHONPATH "${PYTHONPATH}:/client"
 
 RUN mkdir -p /client/.streamlit
-COPY .streamlit/secrets.toml /client/.streamlit/
 COPY fe-requirements.txt /client/fe-requirements.txt
 RUN pip install --no-cache-dir -r fe-requirements.txt
 COPY . /client
