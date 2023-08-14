@@ -7,6 +7,13 @@ venv: app/requirements.txt app/dev-requirements.txt
 	. .venv/bin/activate; pip install -r app/requirements.txt; pip install -r app/dev-requirements.txt
 	touch .venv/bin/activate
 
+# Target to create and activate the virtual environment.
+fe-venv: frontend/fe-requirements.txt
+	test -d frontend/venv-fe || python3.11 -m venv frontend/venv-fe
+	. frontend/venv-fe/bin/activate; pip install -U pip setuptools wheel
+	. frontend/venv-fe/bin/activate; pip install -r frontend/fe-requirements.txt
+	touch frontend/venv-fe/bin/activate
+
 # Remove Python file artifacts and the virtual environment.
 clean:
 	rm -rf .venv
@@ -14,9 +21,13 @@ clean:
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '__pycache__' -exec rm -fr {} +
 
-# Deploy using flyctl.
-deploy:
+# Deploy API using flyctl.
+deploy-api:
 	flyctl deploy --ha=false --config app/fly.toml
+
+# Deploy frontend using flyctl.
+deploy-fe:
+	flyctl deploy --ha=false --config frontend/fly.toml
 
 # Regenerate "app/requirements.txt" using "pip-compile".
 app/requirements.txt: requirements.in

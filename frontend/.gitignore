@@ -230,4 +230,3 @@ $RECYCLE.BIN/
 ### Custom ###
 venv-fe/**
 secrets.toml
-# End of file
