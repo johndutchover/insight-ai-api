@@ -6,5 +6,5 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   streamlit run login.py --server.port=8501 --server.address="$LOCAL_IP_ADDRESS"
 else
   # Assuming a Linux environment, just run Streamlit without specifying the address
-  streamlit run login.py --server.port=8501
+  streamlit run login.py --server.port=8501 --server.address="0.0.0.0"
 fi
