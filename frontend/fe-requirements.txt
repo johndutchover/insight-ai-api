@@ -133,6 +133,7 @@ referencing==0.30.2
     #   jsonschema-specifications
 requests==2.31.0
     # via
+    #   -r fe-requirements.in
     #   favicon
     #   streamlit
 rich==13.5.2
