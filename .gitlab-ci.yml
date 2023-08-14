@@ -108,6 +108,7 @@ deploy-prod:
     - echo "Deploy app from $CI_COMMIT_BRANCH branch"
     - flyctl auth token $FLY_API_TOKEN
     - flyctl deploy --ha=false --config app/fly.toml
+    - flyctl deploy --ha=false --config frontend/fly.toml
   environment: production
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
