@@ -1,8 +1,8 @@
 FROM python:3.11.4-slim-bookworm
 WORKDIR /client
-ENV PYTHONPATH "${PYTHONPATH}:/client"
+ENV PYTHONPATH /client
 
-COPY frontend/fe-requirements.txt /client/fe-requirements.txt
+COPY fe-requirements.txt /client/fe-requirements.txt
 COPY start_streamlit.sh /client/start_streamlit.sh
 RUN chmod +x /client/start_streamlit.sh
 RUN pip install --no-cache-dir -r fe-requirements.txt
