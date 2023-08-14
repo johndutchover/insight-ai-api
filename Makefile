@@ -21,9 +21,13 @@ clean:
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '__pycache__' -exec rm -fr {} +
 
-# Deploy using flyctl.
-deploy:
+# Deploy API using flyctl.
+deploy-api:
 	flyctl deploy --ha=false --config app/fly.toml
+
+# Deploy frontend using flyctl.
+deploy-fe:
+	flyctl deploy --ha=false --config frontend/fly.toml
 
 # Regenerate "app/requirements.txt" using "pip-compile".
 app/requirements.txt: requirements.in
