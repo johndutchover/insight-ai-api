@@ -1,17 +1,12 @@
-# app/Dockerfile
-
 FROM python:3.11.4-slim-bookworm
-LABEL authors="johndutchover"
+WORKDIR /client
+ENV PYTHONPATH "${PYTHONPATH}:/client"
 
-WORKDIR /app
-ENV PYTHONPATH "${PYTHONPATH}:/app"
-
-# Copy only the requirements file and install dependencies
-COPY fe-requirements.txt /app/fe-requirements.txt
+COPY .env /client
+RUN mkdir -p /client/.streamlit
+COPY .streamlit/secrets.toml /client/.streamlit/
+COPY fe-requirements.txt /client/fe-requirements.txt
 RUN pip install --no-cache-dir -r fe-requirements.txt
-
-# Copy all files and directories from the current directory to /app
-COPY . /app
-
+COPY . /client
 EXPOSE 8501
-ENTRYPOINT ["bash", "/app/start_streamlit.sh"]
+ENTRYPOINT ["bash", "/client/start_streamlit.sh"]
