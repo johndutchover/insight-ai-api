@@ -8,7 +8,10 @@ primary_region = "ewr"
 swap_size_mb = 512
 
 [build]
-  dockerfile = "./Dockerfile"
+  dockerfile = "frontend/Dockerfile"
+
+[env]
+  PYTHONPATH = "client/"
 
 [http_service]
   internal_port = 8501
