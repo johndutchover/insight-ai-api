@@ -11,7 +11,7 @@ def check_password():
     if st.session_state.get("password_correct"):
         return True
 
-    password = st.text_input("Password", type="password")
+    password = st.text_input("Password", type="password", key="password_input")
     expected_password = os.environ.get("FE_PWD")
 
     if expected_password is None:
