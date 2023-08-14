@@ -37,12 +37,27 @@ app/requirements.txt: requirements.in
 app/dev-requirements.txt: dev-requirements.in
 	pip-compile dev-requirements.in -o app/dev-requirements.txt
 
-# Regenerate both "app/requirements.txt" and "app/dev-requirements.txt".
-compile: app/requirements.txt app/dev-requirements.txt
+# Regenerate "frontend/fe-requirements" using "pip-compile"
+frontend-requirements: fe-requirements.in
+	pip-compile fe-requirements.in -o frontend/fe-requirements.txt
+
+# Regenerate "cli/cli-requirements" using "pip-compile"
+cli-requirements: cli-requirements.in
+	pip-compile cli-requirements.in -o cli/cli-requirements.txt
+
+app-requirements: app/requirements.txt app/dev-requirements.txt
 
 # Synchronize the virtual environment with the packages listed.
-sync:
+sync-app-requirements:
 	@pip-sync app/requirements.txt app/dev-requirements.txt
 
-# Update both files and sync the virtual environment with latest dependencies.
-update: compile sync
+sync-fe-requirements:
+	@pip-sync frontend/fe-requirements.txt
+
+sync-cli-requirements:
+	@pip-sync cli/cli-requirements.txt
+
+sync-requirements: sync-app-requirements sync-cli-requirements sync-fe-requirements
+
+# Update all requirements files and sync the virtual environment with latest dependencies.
+update-requirements: app-requirements sync-app-requirements sync-fe-requirements sync-cli-requirements
