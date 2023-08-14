@@ -7,7 +7,7 @@ app = "insight-ai-api"
 primary_region = "ewr"
 
 [build]
-  dockerfile = "../Dockerfile"
+  dockerfile = "./Dockerfile"
 
 [http_service]
   internal_port = 8000
