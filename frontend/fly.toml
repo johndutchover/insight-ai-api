@@ -8,7 +8,7 @@ primary_region = "ewr"
 swap_size_mb = 512
 
 [build]
-  dockerfile = "frontend/Dockerfile"
+  dockerfile = "./Dockerfile"
 
 [env]
   PYTHONPATH = "client/"
