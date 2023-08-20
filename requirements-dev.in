@@ -3,6 +3,7 @@
 pip-tools
 uvicorn
 pytest
+pytest-cov
 poethepoet
 pre-commit
 conventional-pre-commit

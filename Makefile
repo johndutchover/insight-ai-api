@@ -1,17 +1,17 @@
 .PHONY: clean venv update deploy compile-requirements compile-dev-requirements compile sync all test
 
 # Target to create and activate the virtual environment.
-venv: app/requirements.txt app/dev-requirements.txt
+venv: app/requirements.txt app/requirements_dev.txt
 	test -d .venv || python3.11 -m venv .venv
 	. .venv/bin/activate; pip install -U pip setuptools wheel
-	. .venv/bin/activate; pip install -r app/requirements.txt; pip install -r app/dev-requirements.txt
+	. .venv/bin/activate; pip install -r app/requirements.txt; pip install -r app/requirements_dev.txt
 	touch .venv/bin/activate
 
 # Target to create and activate the virtual environment.
-fe-venv: frontend/fe-requirements.txt
+fe-venv: frontend/requirements_frontend.txt
 	test -d frontend/venv-fe || python3.11 -m venv frontend/venv-fe
 	. frontend/venv-fe/bin/activate; pip install -U pip setuptools wheel
-	. frontend/venv-fe/bin/activate; pip install -r frontend/fe-requirements.txt
+	. frontend/venv-fe/bin/activate; pip install -r frontend/requirements_frontend.txt
 	touch frontend/venv-fe/bin/activate
 
 # Remove Python file artifacts and the virtual environment.
@@ -33,31 +33,28 @@ deploy-fe:
 app/requirements.txt: requirements.in
 	pip-compile requirements.in -o app/requirements.txt
 
-# Regenerate "app/dev-requirements.txt" using "pip-compile".
-app/dev-requirements.txt: dev-requirements.in
-	pip-compile dev-requirements.in -o app/dev-requirements.txt
+# Regenerate "app/requirements_dev.txt" using "pip-compile".
+app/requirements_dev.txt: requirements-dev.in
+	pip-compile requirements-dev.in -o app/requirements_dev.txt
+
+app-requirements: app/requirements.txt app/requirements_dev.txt
 
 # Regenerate "frontend/fe-requirements" using "pip-compile"
-frontend-requirements: fe-requirements.in
-	pip-compile fe-requirements.in -o frontend/fe-requirements.txt
+frontend-requirements: requirements-frontend.in
+	pip-compile requirements-frontend.in -o frontend/requirements_frontend.txt
 
 # Regenerate "cli/cli-requirements" using "pip-compile"
-cli-requirements: cli-requirements.in
-	pip-compile cli-requirements.in -o cli/cli-requirements.txt
+cli-requirements: requirements-cli.in
+	pip-compile requirements-cli.in -o cli/requirements_cli.txt
 
-app-requirements: app/requirements.txt app/dev-requirements.txt
+compile-requirements: cli-requirements frontend-requirements app/requirements.txt app/requirements_dev.txt
 
 # Synchronize the virtual environment with the packages listed.
 sync-app-requirements:
-	@pip-sync app/requirements.txt app/dev-requirements.txt
+	@pip-sync app/requirements.txt app/requirements_dev.txt
 
 sync-fe-requirements:
-	@pip-sync frontend/fe-requirements.txt
+	@pip-sync frontend/requirements_frontend.txt
 
 sync-cli-requirements:
-	@pip-sync cli/cli-requirements.txt
-
-sync-requirements: sync-app-requirements sync-cli-requirements sync-fe-requirements
-
-# Update all requirements files and sync the virtual environment with latest dependencies.
-update-requirements: app-requirements sync-app-requirements sync-fe-requirements sync-cli-requirements
+	@pip-sync cli/requirements_cli.txt

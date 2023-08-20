@@ -14,3 +14,7 @@ exclude = '(\.idea/|app/fly.toml|frontend/fly.toml)'
 # flake8 configuration
 [tool.flake8]
 exclude = '.idea,app/fly.toml,frontend/fly.toml'
+
+# poethepoet tasks
+[tool.poe.tasks]
+test = "pytest --cov=app -v"

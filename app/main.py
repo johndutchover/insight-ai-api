@@ -6,7 +6,7 @@ from fastapi import FastAPI
 from marvin import ai_fn, ai_model, AIApplication
 from pydantic import BaseModel
 
-from routers import facts, translate
+from app.routers import facts, translate, poems
 
 load_dotenv()
 
@@ -14,6 +14,7 @@ app = FastAPI()
 
 app.include_router(facts.router, prefix="/facts", tags=["facts"])
 app.include_router(translate.router, prefix="/translate", tags=["translate"])
+app.include_router(poems.router, prefix="/poem", tags=["poem"])
 
 marvin.settings.llm_model = "openai/gpt-3.5-turbo"
 marvin_openai_api_key = os.environ.get("MARVIN_OPENAI_API_KEY")
