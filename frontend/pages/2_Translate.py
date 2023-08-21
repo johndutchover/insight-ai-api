@@ -41,7 +41,7 @@ user_input_text = st.text_area("Enter the text to translate", "book")
 
 if st.button("Czech out this poem"):
     if user_input_text:
-        translation = translate(user_input_text, language="czech")
+        translation = translate(user_input_text, language="english")
         poem = create_poem(translation)
         if translation:
             st.subheader("Translation:")
