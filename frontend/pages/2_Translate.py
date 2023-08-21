@@ -1,14 +1,17 @@
 import streamlit as st
 import requests
 import logging
+from dotenv import load_dotenv
+import os
 
-BASE_URL = "https://insight-ai-api.fly.dev/"
-# BASE_URL = "http://localhost:8000/"
+load_dotenv()
+
+base_url = os.environ.get("BASE_URL")
 
 
 def translate(text: str, language: str):
     endpoint = f"translate/translate?text={text}&language={language}"
-    url = BASE_URL + endpoint
+    url = base_url + endpoint
     logging.info(f"Requesting {url}")
     response = requests.post(url, timeout=5)
 
@@ -21,7 +24,7 @@ def translate(text: str, language: str):
 
 def create_poem(text: str):
     endpoint = f"poem/poem?text={text}"
-    url = BASE_URL + endpoint
+    url = base_url + endpoint
     logging.info(f"Requesting {url}")
     response = requests.post(url, timeout=5)
 
@@ -42,9 +45,9 @@ if st.button("Czech out this poem"):
         poem = create_poem(translation)
         if translation:
             st.subheader("Translation:")
-            st.code(translation)  # Displaying the translation in a monospace font
+            st.code(translation)
             st.subheader("Here is a poem about the translation:")
             poem = poem.replace(
                 "\\n", "\n"
             )  # Replacing literal "\n" with actual newline characters
-            st.code(poem)  # Displaying the poem in a monospace font
+            st.code(poem)
