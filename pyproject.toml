@@ -4,7 +4,8 @@ version = ["version"]
 readme = "README.md"
 
 [tool.bandit]
-exclude = "B104"
+exclude_dirs = [".idea"]
+skips = ["B104"]
 
 # black configuration
 [tool.black]
