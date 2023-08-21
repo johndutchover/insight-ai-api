@@ -65,7 +65,7 @@ mega-linter:
     # https://megalinter.io/configuration/
     DEFAULT_WORKSPACE: $CI_PROJECT_DIR
     # ADD YOUR CUSTOM ENV VARIABLES HERE TO OVERRIDE VALUES OF .mega-linter.yml AT THE ROOT OF YOUR REPOSITORY
-    ENABLE_LINTERS: MAKEFILE_CHECKMAKE,PYTHON_BLACK,PYTHON_FLAKE8,PYTHON_BANDIT
+    ENABLE_LINTERS: MAKEFILE_CHECKMAKE,PYTHON_BLACK,PYTHON_FLAKE8
   artifacts:
     when: always
     paths:
@@ -92,15 +92,15 @@ mega-linter:
 #    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
 #    - when: always
 
-#bandit:
-#  stage: code_quality
-#  script:
-#    - source .venv/bin/activate
-#    - pip install pre-commit
-#    - pre-commit run bandit --all-files
-#  rules:
-#    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
-#    - when: always
+bandit:
+  stage: code_quality
+  script:
+    - source .venv/bin/activate
+    - pip install pre-commit
+    - pre-commit run bandit --all-files
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
+    - when: always
 
 deploy-backend:
   stage: deploy
