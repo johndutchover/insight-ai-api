@@ -17,7 +17,7 @@ app.include_router(translate.router, prefix="/translate", tags=["translate"])
 app.include_router(poems.router, prefix="/poem", tags=["poem"])
 
 marvin.settings.llm_model = "openai/gpt-3.5-turbo"
-marvin_openai_api_key = os.environ.get("MARVIN_OPENAI_API_KEY")
+marvin_openai_api_key = os.getenv("MARVIN_OPENAI_API_KEY")
 
 
 # create models to represent the state of the insight-api app
