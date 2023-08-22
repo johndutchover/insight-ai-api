@@ -20,7 +20,7 @@ variables:
 
 stages:
   - install
-  - config_changes
+  - test
   - code_quality
   - deploy
 
