@@ -19,8 +19,8 @@ variables:
   PYTHONPATH: "$CI_PROJECT_DIR"
 
 stages:
-  - install
   - config_changes
+  - install
   - code_quality
   - deploy
 
