@@ -20,7 +20,7 @@ variables:
 
 stages:
   - install
-  - test
+  - config_changes
   - code_quality
   - deploy
 
@@ -40,8 +40,8 @@ install_dependencies:
       when: never
     - when: always
 
-monitor_file_changes:
-  stage: project-files
+config_changes:
+  stage: .pre
   image: python:3.11.4
   script:
     - source .venv/bin/activate
