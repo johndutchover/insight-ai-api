@@ -19,8 +19,8 @@ variables:
   PYTHONPATH: "$CI_PROJECT_DIR"
 
 stages:
-  - config_changes
   - install
+  - test
   - code_quality
   - deploy
 
@@ -41,7 +41,7 @@ install_dependencies:
     - when: always
 
 config_changes:
-  stage: config_changes
+  stage: test
   image: python:3.11.4
   script:
     - source .venv/bin/activate
