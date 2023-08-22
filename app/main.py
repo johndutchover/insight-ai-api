@@ -17,10 +17,9 @@ app.include_router(translate.router, prefix="/translate", tags=["translate"])
 app.include_router(poems.router, prefix="/poem", tags=["poem"])
 
 marvin.settings.llm_model = "openai/gpt-3.5-turbo"
-marvin_openai_api_key = os.environ.get("MARVIN_OPENAI_API_KEY")
+marvin_openai_api_key = os.getenv("MARVIN_OPENAI_API_KEY")
 
 
-# create models to represent the state of the insight-api app
 class Insight(BaseModel):
     title: str
     description: str = None
@@ -31,15 +30,20 @@ class InsightState(BaseModel):
     todos: list[Insight] = []
 
 
-# create the app with an initial state and description
 insight_app = AIApplication(
     state=InsightState(),
     description="A simple app to provide insights using OpenAI.",
 )
 
 
-@app.get("/")
+class RootResponse(BaseModel):
+    n: int
+    color: str
+
+
+@app.get("/", response_model=RootResponse)
 async def read_root(n: int = 10, color: str = "blue"):
+    """Get the root with optional parameters n and color."""
     return {"n": n, "color": color}
 
 
@@ -48,12 +52,14 @@ async def read_root(n: int = 10, color: str = "blue"):
 @ai_fn
 def generate_fruits(n: int) -> list[str]:
     """Generates a list of `n` fruits"""
+    # Implementation logic here
 
 
 @app.get("/generate_vegetables")
 @ai_fn
 def generate_vegetables(n: int, color: str) -> list[str]:
     """Generates a list of `n` vegetables of color `color`"""
+    # Implementation logic here
 
 
 @ai_model
