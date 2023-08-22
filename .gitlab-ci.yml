@@ -40,8 +40,8 @@ install_dependencies:
       when: never
     - when: always
 
-monitor_file_changes:
-  stage: project-files
+config_changes:
+  stage: config_changes
   image: python:3.11.4
   script:
     - source .venv/bin/activate
