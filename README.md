@@ -41,19 +41,22 @@ From repository root:
 
 Makefile command table
 
-| Make command                    | Purpose                                                                     |
-|---------------------------------|-----------------------------------------------------------------------------|
-| `make venv`                     | Target to create and activate the backend virtual environment               |
-| `make fe-venv`                  | Target to create and activate the frontend virtual environment              |
-| `make clean`                    | Remove Python file artifacts and the virtual environment                    |
-| `make deploy`                   | Deploy app using flyctl                                                     |
-| `make app/requirements.txt`     | Generate "app/requirements.txt" by compiling "requirements.in"              |
-| `make app/dev-requirements.txt` | Generate "app/dev-requirements.txt" by compiling "dev-requirements.in"      |
-| `make compile-requirements`     | Regenerate "app/requirements.txt" using "pip-compile"                       |
-| `make compile-dev-requirements` | Regenerate "app/dev-requirements.txt" using "pip-compile"                   |
-| `make compile`                  | Regenerate both "app/requirements.txt" and "app/dev-requirements.txt"       |
-| `make sync`                     | Synchronize the virtual environment with the packages listed                |
-| `make update`                   | Update both files and sync the virtual environment with latest dependencies |
+| Command                         | Purpose                                                                            |
+|---------------------------------|------------------------------------------------------------------------------------|
+| `make venv`                     | Target to create and activate the app virtual environment                          |
+| `make venv-fe`                  | Target to create and activate the frontend virtual environment                     |
+| `make app/requirements`         | Generate "app/requirements.txt" by compiling "requirements.in"                     |
+| `make app/requirements_dev`     | Generate "app/requirements_dev.txt" by compiling "requirements-dev.in"             |
+| `make app-requirements`         | Generate "app/requirements.txt" and "app/requirements_dev.txt"                     |
+| `make frontend-requirements`    | Generate "frontend/requirements_fe.txt" by compiling "requirements-fe.in"          |
+| `make cli-requirements`         | Generate "cli/requirements_fe.txt" by compiling "requirements-cli.in"              |
+| `make compile-requirements`     | Regenerate both "app/requirements.txt" and "app/requirements_dev.txt"              |
+| `make compile-requirements-dev` | Regenerate "app/requirements_dev.txt" using "pip-compile"                          |
+| `make deploy-api`               | Deploy app (api) using flyctl                                                      |
+| `make deploy-fe`                | Deploy frontend using flyctl                                                       |
+| `make sync-requirements-app`    | Synchronize .venv/ with the packages in requirements.txt  and requirements_dev.txt |
+| `make sync-requirements-cli`    | Synchronize cli/venv-cli/ with the packages in requirements_cli.txt                |
+| `make sync-requirements-fe`     | Synchronize frontend/venv-fe/ with the packages in requirements_frontend.txt       |
 
 ### GitLab CI
 
