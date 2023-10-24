@@ -3,9 +3,6 @@ import marvin
 
 from fastapi import APIRouter
 from marvin import ai_fn
-from dotenv import load_dotenv, find_dotenv
-
-load_dotenv(find_dotenv())
 
 router = APIRouter()
 

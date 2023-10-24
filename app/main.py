@@ -1,14 +1,11 @@
 import os
 
 import marvin
-from dotenv import load_dotenv
 from fastapi import FastAPI
 from marvin import ai_fn, ai_model, AIApplication
 from pydantic import BaseModel
 
 from app.routers import facts, translate, poems
-
-load_dotenv()
 
 app = FastAPI()
 
