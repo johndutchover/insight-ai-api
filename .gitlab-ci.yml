@@ -1,3 +1,4 @@
+---
 workflow:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
@@ -5,7 +6,7 @@ workflow:
     - when: never
 
 default:
-  image: python:3.11.6
+  image: ${{ vars.PYTHON_IMAGE }}
 before_script:
   - apt-get update -qq && apt-get install -y curl
   - curl -L https://fly.io/install.sh | sh
@@ -42,7 +43,7 @@ install_dependencies:
 
 config_changes:
   stage: test
-  image: python:3.11.6
+  image: ${{ vars.PYTHON_IMAGE }}
   script:
     - source .venv/bin/activate
   rules:
@@ -59,7 +60,7 @@ mega-linter:
   # You can override MegaLinter flavor used to have faster performances
   # More info at https://megalinter.io/flavors/
   image: oxsecurity/megalinter-python:v7.3.0
-  script: [ "true" ] # if script: ["true"] doesn't work, you may try ->  script: [ "/bin/bash /entrypoint.sh" ]
+  script: [ "true" ]
   variables:
     # All available variables are described in documentation
     # https://megalinter.io/configuration/
