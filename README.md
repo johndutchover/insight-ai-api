@@ -1,5 +1,7 @@
 # insight-ai-api
 
+[![MegaLinter](https://github.com/johndutchover/insight-ai-api/actions/workflows/mega-linter.yml/badge.svg)](https://github.com/johndutchover/insight-ai-api/actions/workflows/mega-linter.yml)
+
 ## About
 
 This is a simplistic FastAPI app that uses AI features to enhance api service.
