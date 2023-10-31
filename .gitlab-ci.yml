@@ -1,0 +1,109 @@
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
+      when: always
+    - when: never
+
+default:
+  image: python:3.11.4
+before_script:
+  - apt-get update -qq && apt-get install -y curl
+  - curl -L https://fly.io/install.sh | sh
+  - export FLYCTL_INSTALL="/root/.fly"
+  - export PATH="$FLYCTL_INSTALL/bin:$PATH"
+  - python --version
+  - pip install virtualenv
+  - python -m venv .venv
+
+variables:
+  PYTHONPATH: "$CI_PROJECT_DIR"
+
+stages:
+  - install
+  - test
+  - code_quality
+  - deploy
+
+install_dependencies:
+  stage: install
+  script:
+    - source .venv/bin/activate
+    - pip install -r app/requirements_dev.txt
+    - pip install -r app/requirements.txt
+    - pip install pre-commit
+  rules:
+    - changes:
+        - Makefile
+        - requirements-dev.in
+        - requirements.in
+        - pyproject.toml
+      when: never
+    - when: always
+
+config_changes:
+  stage: test
+  image: python:3.11.4
+  script:
+    - source .venv/bin/activate
+  rules:
+    - changes:
+        - Makefile
+        - requirements-dev.in
+        - requirements.in
+        - pyproject.toml
+      when: never
+    - when: always
+
+mega-linter:
+  stage: code_quality
+  # You can override MegaLinter flavor used to have faster performances
+  # More info at https://megalinter.io/flavors/
+  image: oxsecurity/megalinter-python:v7.3.0
+  script: [ "true" ] # if script: ["true"] doesn't work, you may try ->  script: [ "/bin/bash /entrypoint.sh" ]
+  variables:
+    # All available variables are described in documentation
+    # https://megalinter.io/configuration/
+    DEFAULT_WORKSPACE: $CI_PROJECT_DIR
+    # ADD YOUR CUSTOM ENV VARIABLES HERE TO OVERRIDE VALUES OF .mega-linter.yml AT THE ROOT OF YOUR REPOSITORY
+    ENABLE_LINTERS: MAKEFILE_CHECKMAKE,PYTHON_BLACK,PYTHON_FLAKE8
+  artifacts:
+    when: always
+    paths:
+      - megalinter-reports
+    expire_in: 1 week
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
+    - when: always
+
+bandit:
+  stage: code_quality
+  script:
+    - source .venv/bin/activate
+    - pip install pre-commit
+    - pre-commit run bandit --all-files
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
+    - when: always
+
+deploy-backend:
+  stage: deploy
+  script:
+    - echo "Deploy backend app from $CI_COMMIT_BRANCH branch"
+    - flyctl auth token $FLY_API_TOKEN
+    - flyctl deploy --ha=false --config app/fly.toml
+  environment: production
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+    - when: manual
+
+deploy-frontend:
+  stage: deploy
+  script:
+    - echo "Deploy frontend app from $CI_COMMIT_BRANCH branch"
+    - export PYTHONPATH="client/"
+    - flyctl auth token $FLY_API_TOKEN
+    - flyctl deploy --ha=false --config frontend/fly.toml
+  environment: production
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+    - when: manual

@@ -1,0 +1,43 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: https://github.com/psf/black
+    rev: 23.7.0
+    hooks:
+      - id: black
+        types:
+          - python
+        args: ["--config=pyproject.toml"]
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 6.0.0
+    hooks:
+      - id: flake8
+        types:
+          - python
+
+  - repo: https://github.com/pycqa/bandit
+    rev: 1.7.5
+    hooks:
+      - id: bandit
+        args: ["-c", "pyproject.toml", "-ll"]
+        files: .py$
+
+  - repo: local
+    hooks:
+      - id: conventional-pre-commit
+        name: Conventional Commit (local)
+        entry: conventional-pre-commit
+        language: python
+        stages: [commit-msg]
+
+  - repo: https://github.com/mrtazz/checkmake.git
+    rev: 0.2.2
+    hooks:
+      # Use this hook to let pre-commit build checkmake in its sandbox
+      - id: checkmake

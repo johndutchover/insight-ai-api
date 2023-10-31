@@ -1,0 +1,6 @@
+# fe-requirements.in
+python-dotenv
+streamlit
+streamlit_extras
+watchdog
+requests

@@ -1,0 +1,3 @@
+# requirements.in
+fastapi
+marvin==1.4.2

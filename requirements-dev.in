@@ -1,0 +1,12 @@
+# dev-requirements.in
+-r app/requirements.txt
+pip-tools
+uvicorn
+pytest
+pytest-cov
+poethepoet
+pre-commit
+conventional-pre-commit
+pipdeptree
+httpx
+black

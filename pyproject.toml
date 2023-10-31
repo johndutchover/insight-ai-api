@@ -1,0 +1,21 @@
+[project]
+name = "insight-ai-api"
+version = ["version"]
+readme = "README.md"
+
+[tool.bandit]
+exclude_dirs = [".idea"]
+skips = ["B104"]
+
+# black configuration
+[tool.black]
+line-length = 88
+exclude = '(\.idea/|app/fly.toml|frontend/fly.toml)'
+
+# flake8 configuration
+[tool.flake8]
+exclude = '.idea,app/fly.toml,frontend/fly.toml'
+
+# poethepoet tasks
+[tool.poe.tasks]
+test = "pytest --cov=app -v"
