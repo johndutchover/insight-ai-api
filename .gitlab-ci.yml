@@ -1,4 +1,3 @@
----
 workflow:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
@@ -6,7 +5,7 @@ workflow:
     - when: never
 
 default:
-  image: ${{ vars.PYTHON_IMAGE }}
+  image: python:3.11.6
 before_script:
   - apt-get update -qq && apt-get install -y curl
   - curl -L https://fly.io/install.sh | sh
@@ -43,7 +42,7 @@ install_dependencies:
 
 config_changes:
   stage: test
-  image: ${{ vars.PYTHON_IMAGE }}
+  image: python:3.11.6
   script:
     - source .venv/bin/activate
   rules:
@@ -53,6 +52,27 @@ config_changes:
         - requirements.in
         - pyproject.toml
       when: never
+    - when: always
+
+mega-linter:
+  stage: code_quality
+  # You can override MegaLinter flavor used to have faster performances
+  # More info at https://megalinter.io/flavors/
+  image: oxsecurity/megalinter-python:v7.3.0
+  script: [ "true" ] # if script: ["true"] doesn't work, you may try ->  script: [ "/bin/bash /entrypoint.sh" ]
+  variables:
+    # All available variables are described in documentation
+    # https://megalinter.io/configuration/
+    DEFAULT_WORKSPACE: $CI_PROJECT_DIR
+    # ADD YOUR CUSTOM ENV VARIABLES HERE TO OVERRIDE VALUES OF .mega-linter.yml AT THE ROOT OF YOUR REPOSITORY
+    ENABLE_LINTERS: MAKEFILE_CHECKMAKE,PYTHON_BLACK,PYTHON_FLAKE8
+  artifacts:
+    when: always
+    paths:
+      - megalinter-reports
+    expire_in: 1 week
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
     - when: always
 
 bandit:
