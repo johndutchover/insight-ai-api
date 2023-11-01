@@ -1,3 +1,4 @@
+---
 workflow:
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
@@ -58,8 +59,8 @@ mega-linter:
   stage: code_quality
   # You can override MegaLinter flavor used to have faster performances
   # More info at https://megalinter.io/flavors/
-  image: oxsecurity/megalinter-python:v7.3.0
-  script: [ "true" ] # if script: ["true"] doesn't work, you may try ->  script: [ "/bin/bash /entrypoint.sh" ]
+  image: oxsecurity/megalinter-python:v7.5.0
+  script: ["true"]
   variables:
     # All available variables are described in documentation
     # https://megalinter.io/configuration/
