@@ -16,3 +16,5 @@ EXPOSE 8000
 
 # Run app.main when the container launches
 CMD ["python", "-m", "app.main"]
+# For k8s
+ENV APP_MODULE=app.main
