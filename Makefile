@@ -36,12 +36,15 @@ compile-requirements: app/requirements.txt app/requirements_dev.txt
 compile-requirements-dev: app/requirements_dev.txt
 
 # Deploy API using flyctl.
-deploy-api:
-	flyctl deploy --ha=false --config app/fly.toml
+deploy-api-prod:
+	flyctl deploy --ha=false --config app/fly.production.toml
+
+deploy-api-staging:
+	flyctl deploy --ha=false --config app/fly.staging.toml
 
 # Deploy frontend using flyctl.
 deploy-fe:
-	flyctl deploy --ha=false --config frontend/fly.toml
+	flyctl deploy --ha=false --config frontend/fly.production.toml
 
 # Synchronize the virtual environment with the packages listed.
 sync-requirements-app:
