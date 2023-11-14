@@ -78,7 +78,6 @@ pydantic==1.10.13
     # via
     #   fastapi
     #   marvin
-    #   pydantic
 pygments==2.16.1
     # via rich
 python-dotenv==1.0.0
