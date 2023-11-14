@@ -10,3 +10,4 @@ conventional-pre-commit
 pipdeptree
 httpx
 black
+pydantic-settings
