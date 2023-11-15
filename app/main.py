@@ -5,21 +5,42 @@ from fastapi import FastAPI
 from marvin import ai_fn, ai_model, AIApplication
 from pydantic import BaseModel
 
-from app.routers import facts, translate, poems
-
-app = FastAPI()
-
-app.include_router(facts.router, prefix="/facts", tags=["facts"])
-app.include_router(translate.router, prefix="/translate", tags=["translate"])
-app.include_router(poems.router, prefix="/poem", tags=["poem"])
+from .routers import facts, poems, translate
 
 marvin.settings.llm_model = "openai/gpt-3.5-turbo"
 marvin_openai_api_key = os.getenv("MARVIN_OPENAI_API_KEY")
 
+# Create FastAPI instance
+app = FastAPI()
 
+app.include_router(facts.router)
+app.include_router(poems.router)
+app.include_router(translate.router)
+
+
+# Definite a response model for root endpoint
+class RootResponse(BaseModel):
+    n: int | None = None
+    color: str | None = None
+
+
+# Definite a route for the root endpoint
+@app.get("/")
+async def root():
+    """Get the root with optional parameters n and color."""
+    return {"n": None, "color": None}
+
+
+# Include APIRouter objects
+app.include_router(facts.router, prefix="/facts", tags=["facts"])
+app.include_router(translate.router, prefix="/translate", tags=["translate"])
+app.include_router(poems.router, prefix="/poem", tags=["poem"])
+
+
+# Setup the insight-ai-api application
 class Insight(BaseModel):
-    title: str
-    description: str = None
+    name: str | None = None
+    description: str | None = None
     done: bool = False
 
 
@@ -33,32 +54,20 @@ insight_app = AIApplication(
 )
 
 
-class RootResponse(BaseModel):
-    n: int
-    color: str
-
-
-@app.get("/", response_model=RootResponse)
-async def read_root(n: int = 10, color: str = "blue"):
-    """Get the root with optional parameters n and color."""
-    return {"n": n, "color": color}
-
-
-# https://www.askmarvin.ai/deployment/#fastapi
-@app.get("/generate_fruits")
+# Define routes for generating fruits and vegetables
 @ai_fn
-def generate_fruits(n: int) -> list[str]:
+async def generate_fruits(n: int, color: str) -> list[str]:
     """Generates a list of `n` fruits"""
-    # Implementation logic here
+    return ["apple", "banana", "orange"]
 
 
-@app.get("/generate_vegetables")
 @ai_fn
 def generate_vegetables(n: int, color: str) -> list[str]:
     """Generates a list of `n` vegetables of color `color`"""
-    # Implementation logic here
+    return ["carrot", "potato", "onion"]
 
 
+# Define a pydantic model for a person
 @ai_model
 class Person(BaseModel):
     first_name: str
