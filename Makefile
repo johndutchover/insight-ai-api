@@ -22,7 +22,9 @@ app/requirements: requirements.in
 app/requirements_dev: requirements-dev.in
 	pip-compile --strip-extras requirements-dev.in -o app/requirements_dev.txt
 
-app-requirements: app/requirements.txt app/requirements_dev.txt
+app-requirements: requirements.in requirements-dev.in
+	pip-compile --strip-extras requirements.in -o app/requirements.txt
+	pip-compile --strip-extras requirements-dev.in -o app/requirements_dev.txt
 
 # Regenerate "frontend/fe-requirements" using "pip-compile --strip-extras"
 frontend-requirements: requirements-frontend.in

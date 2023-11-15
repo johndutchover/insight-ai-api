@@ -1,6 +1,5 @@
 # dev-requirements.in
 -r app/requirements.txt
-pip-tools
 uvicorn
 pytest
 pytest-cov
@@ -10,3 +9,4 @@ conventional-pre-commit
 pipdeptree
 httpx
 black
+pydantic-settings
