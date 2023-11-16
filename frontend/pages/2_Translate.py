@@ -1,3 +1,5 @@
+import json
+
 import streamlit as st
 import requests
 import logging
@@ -16,7 +18,8 @@ def translate(text: str, language: str):
     response = requests.post(url, timeout=5)
 
     if response.status_code == 200:
-        return response.text
+        xlate = json.loads(response.text)
+        return xlate.strip('"')
     else:
         st.error("Failed to translate the text.")
         return ""
