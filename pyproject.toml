@@ -19,3 +19,6 @@ exclude = '.idea,app/fly.toml,frontend/fly.toml'
 # poethepoet tasks
 [tool.poe.tasks]
 test = "pytest --cov=app -v"
+
+[tool.pylint.'MESSAGES CONTROL']
+disable = "E0401"
