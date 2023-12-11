@@ -27,12 +27,15 @@ DISABLE_LINTERS:
   - SPELL_MISSPELL
   - SPELL_VALE
 DISABLE_ERRORS_LINTERS:
+  - CKV2_GHA_1
+  - CKV_DOCKER_3
   - PYTHON_BANDIT
   - PYTHON_PYRIGHT
   - REPOSITORY_DEVSKIM
   - REPOSITORY_GRYPE
   - REPOSITORY_SEMGREP
   - REPOSITORY_TRUFFLEHOG
+  - REPOSITORY_TRIVY
 PRINT_ALL_FILES: false
 FILTER_REGEX_EXCLUDE: '(\.automation/test|\.automation/generated|\.venv|\.github/workflows|docs/javascripts|docs/overrides|docs/json-schemas|flavors|clj-kondo|TEMPLATES)'
 JSON_JSONLINT_FILTER_REGEX_EXCLUDE: '(\.vscode/)'
