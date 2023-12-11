@@ -224,6 +224,8 @@ typer==0.9.0
     # via
     #   -r app/requirements.txt
     #   marvin
+types-requests==2.31.0.10
+    # via -r requirements-dev.in
 typing-extensions==4.8.0
     # via
     #   -r app/requirements.txt
@@ -239,6 +241,7 @@ urllib3==2.1.0
     # via
     #   -r app/requirements.txt
     #   requests
+    #   types-requests
 uvicorn==0.24.0.post1
     # via
     #   -r app/requirements.txt

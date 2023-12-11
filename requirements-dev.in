@@ -10,3 +10,4 @@ pipdeptree
 httpx
 black
 pydantic-settings
+types-requests
