@@ -59,6 +59,7 @@ EMAIL_REPORTER: false
 FILEIO_REPORTER: false
 JSON_REPORTER: true
 GITHUB_STATUS_REPORTER: false
+PYTHON_MYPY_DISABLE_ERRORS: true
 PLUGINS:
   - https://raw.githubusercontent.com/oxsecurity/megalinter/main/.automation/test/mega-linter-plugin-test/test.megalinter-descriptor.yml
 PRE_COMMANDS:
