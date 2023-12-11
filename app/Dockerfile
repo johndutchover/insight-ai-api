@@ -14,5 +14,11 @@ COPY app/ ./app/
 # Make port 8000 available to the world outside this container
 EXPOSE 8000
 
+HEALTHCHECK --interval=5m --timeout=3s \
+  --start-period=1m \
+  CMD curl --fail http://localhost:8000/docs || exit 1
+
 # Run app.main when the container launches
 CMD ["python", "-m", "app.main"]
+# For k8s
+ENV APP_MODULE=app.main
