@@ -30,4 +30,7 @@ def random_fact(n: int) -> dict[int, str]:
 
 @router.post("/fact_for_number")
 def fact_for_number(n: int) -> dict[int, str]:
-    return random_fact(n)
+    if n == 0:
+        return {0: "The factorial of 0 is 1."}
+    else:
+        return random_fact(n)
