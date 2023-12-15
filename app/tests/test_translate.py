@@ -5,7 +5,7 @@ from app.routers import facts, translate  # Import the required modules
 client = TestClient(app)
 
 
-def test_translate():
+def test_translate() -> None:
     # Use the imported modules to avoid unused import warning
     print(facts)
     print(translate)
