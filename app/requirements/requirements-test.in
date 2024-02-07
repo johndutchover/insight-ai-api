@@ -1,4 +1,4 @@
-# test.in
+# requirements-test.in
 -r base.in
 black
 flake8

@@ -36,7 +36,7 @@ install_dependencies:
     - changes:
         - Makefile
         - base.in
-        - test.in
+        - requirements-requirements-test.in
         - requirements-dev.in
         - requirements.in
         - pyproject.toml
