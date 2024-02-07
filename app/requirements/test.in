@@ -1,0 +1,7 @@
+# test.in
+-r base.in
+black
+flake8
+mock
+pytest
+pytest-cov
