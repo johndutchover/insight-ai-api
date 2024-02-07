@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "app"
+authors = [
+  { name = "John Dutchover", email = "1983909-johndutchover@users.noreply.gitlab.com" },
+]
+description = "API for insight-ai-api"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi",
+  "marvin",
+  'importlib-metadata; python_version<"3.12"',
+]
+dynamic = ["version"]
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements/requirements.in"] }
+optional-dependencies.test = { file = ["requirements/test.txt"] }
+
+[tool.flake8]
+exclude = '.idea,app/fly.toml,frontend/fly.toml'
