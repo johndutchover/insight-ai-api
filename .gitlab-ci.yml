@@ -6,14 +6,14 @@ workflow:
     - when: never
 
 default:
-  image: python:3.11.6
+  image: python:3.11.7
 before_script:
   - apt-get update -qq && apt-get install -y curl
   - curl -L https://fly.io/install.sh | sh
   - export FLYCTL_INSTALL="/root/.fly"
   - export PATH="$FLYCTL_INSTALL/bin:$PATH"
   - python --version
-  - pip install virtualenv
+  - python -m pip install virtualenv
   - python -m venv .venv
 
 variables:
@@ -29,12 +29,14 @@ install_dependencies:
   stage: install
   script:
     - source .venv/bin/activate
-    - pip install -r app/requirements_dev.txt
-    - pip install -r app/requirements.txt
-    - pip install pre-commit
+    -  python -m pip install -r app/requirements-dev.txt
+    -  python -m pip install -r app/requirements.txt
+    -  python -m pip install pre-commit
   rules:
     - changes:
         - Makefile
+        - base.in
+        - test.in
         - requirements-dev.in
         - requirements.in
         - pyproject.toml
@@ -43,7 +45,7 @@ install_dependencies:
 
 config_changes:
   stage: test
-  image: python:3.11.6
+  image: python:3.11.7
   script:
     - source .venv/bin/activate
   rules:
@@ -82,7 +84,7 @@ bandit:
   stage: code_quality
   script:
     - source .venv/bin/activate
-    - pip install pre-commit
+    - python -m pip install pre-commit
     - pre-commit run bandit --all-files
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" || $CI_COMMIT_BRANCH == "main"'
