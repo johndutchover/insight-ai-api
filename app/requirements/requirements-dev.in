@@ -1,4 +1,4 @@
-# dev-requirements.in
+# requirements-dev.in
 -r requirements.in
 conventional-pre-commit
 httpx
