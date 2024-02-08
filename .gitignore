@@ -226,8 +226,4 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 *.lnk
-
-### Custom ###
-venv-fe/**
-secrets.toml
 # End of file
