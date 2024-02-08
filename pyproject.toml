@@ -10,11 +10,11 @@ skips = ["B104"]
 # black configuration
 [tool.black]
 line-length = 88
-exclude = '(\.idea/|app/fly.toml|frontend/fly.toml)'
+exclude = '(\.idea/|app/fly.toml'
 
 # flake8 configuration
 [tool.flake8]
-exclude = '.idea,app/fly.toml,frontend/fly.toml'
+exclude = '.idea,app/fly.toml'
 
 # poethepoet tasks
 [tool.poe.tasks]
