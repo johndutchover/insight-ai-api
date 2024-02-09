@@ -1,8 +1,8 @@
 update-deps:
 	pre-commit autoupdate
 	python -m pip install --upgrade pip-tools pip wheel
-	python -m piptools compile --upgrade --resolver backtracking -o requirements/requirements.txt pyproject.toml
-	python -m piptools compile --extra dev --upgrade --resolver backtracking -o requirements/requirements-dev.txt pyproject.toml
+	python -m piptools compile --upgrade -o requirements/requirements.txt pyproject.toml
+	python -m piptools compile --extra dev --upgrade -o requirements/requirements-dev.txt pyproject.toml
 
 
 init:
