@@ -26,7 +26,7 @@ repos:
     rev: 1.7.7
     hooks:
       - id: bandit
-        args: ["-c", "app/pyproject.toml", "-ll"]
+        args: ["-c", "pyproject.toml", "-ll"]
         files: .py$
 
   - repo: local
