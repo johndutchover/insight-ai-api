@@ -10,7 +10,6 @@ skips = ["B104"]
 # black configuration
 [tool.black]
 line-length = 88
-exclude = "(\.idea/|app/fly.toml)"
 
 # flake8 configuration
 [tool.flake8]
