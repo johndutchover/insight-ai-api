@@ -20,8 +20,5 @@ dynamic = ["version"]
 [tool.setuptools.dynamic]
 dependencies = { file = ["requirements/requirements.in"] }
 
-[tool.flake8]
-exclude = '.idea,app/fly.toml'
-
 [tool.pip-compile]
 generate-hashes = true
