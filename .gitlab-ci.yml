@@ -116,17 +116,3 @@ deploy-backend:
     - when: manual
     - if: $CI_MERGE_REQUEST_TITLE =~ /^Draft:/
       when: never
-
-deploy-frontend:
-  stage: deploy
-  script:
-    - echo "Deploy frontend app from $CI_COMMIT_BRANCH branch"
-    - export PYTHONPATH="client/"
-    - flyctl auth token $FLY_API_TOKEN
-    - flyctl deploy --ha=false --config frontend/fly.production.toml
-  environment: production
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
-    - when: manual
-    - if: $CI_MERGE_REQUEST_TITLE =~ /^Draft:/
-      when: never
