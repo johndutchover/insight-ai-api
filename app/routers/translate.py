@@ -1,10 +1,10 @@
+import marvin
 from fastapi import APIRouter
-from marvin import ai_fn
 
 router = APIRouter()
 
 
-@ai_fn
+@marvin.fn
 def translate_ai(text: str) -> str:
     """Given the input `text`, return a translation to czech."""
 
