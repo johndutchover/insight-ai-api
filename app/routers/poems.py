@@ -1,10 +1,10 @@
+import marvin
 from fastapi import APIRouter
-from marvin import ai_fn
 
 router = APIRouter()
 
 
-@ai_fn
+@marvin.fn
 def create_poem_ai(text: str) -> str:
     """Create a poetic interpretation of the given input text. Transform the meaning, theme, or emotion of the input
     into a long poem, using creative language and metaphors."""
