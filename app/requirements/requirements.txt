@@ -57,11 +57,11 @@ markdown-it-py==3.0.0
     # via rich
 markupsafe==2.1.5
     # via jinja2
-marvin==2.1.3
+marvin==2.1.4
     # via app (pyproject.toml)
 mdurl==0.1.2
     # via markdown-it-py
-openai==1.11.1
+openai==1.12.0
     # via marvin
 pydantic==2.6.1
     # via
@@ -90,7 +90,7 @@ sniffio==1.3.0
     #   openai
 starlette==0.36.3
     # via fastapi
-tiktoken==0.5.2
+tiktoken==0.6.0
     # via marvin
 tqdm==4.66.1
     # via openai
