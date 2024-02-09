@@ -5,7 +5,7 @@ FROM python:3.11.7
 WORKDIR /usr/src
 
 # Copy the requirements.txt first to leverage Docker cache
-COPY requirements/requirements.txt ./app/
+COPY requirements.txt ./app/
 RUN pip install --no-cache-dir -r app/requirements.txt
 
 # Copy the app directory contents into the container at /usr/src/app
