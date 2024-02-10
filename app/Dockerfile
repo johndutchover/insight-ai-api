@@ -4,7 +4,10 @@ FROM python:3.11.7
 # Set the working directory in the Docker image
 WORKDIR /usr/src/app
 
-# Create the requirements directory and copy requirements.txt
+# Create the requirements directory
+RUN mkdir requirements
+
+# Copy requirements.txt into the container at /usr/src/app/requirements/
 COPY requirements/requirements.txt requirements/
 
 # Install dependencies
