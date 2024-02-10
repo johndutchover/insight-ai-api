@@ -70,8 +70,7 @@ bandit:
 deploy-backend:
   stage: deploy
   script:
-    - ls -la $CI_PROJECT_DIR\app
-    - ls -la $CI_PROJECT_DIR\app\requirements
+    - echo "Deploy backend app from $CI_COMMIT_BRANCH branch"
     - flyctl auth token $FLY_API_TOKEN
     - flyctl deploy --ha=false --config app/fly.toml --dockerfile app/Dockerfile -a insight-ai-api
   environment: production
