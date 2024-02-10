@@ -3,26 +3,27 @@
 **/Thumbs.db
 
 # Common Development Tools
-**/.vscode/*
-**/.idea
+**/.vscode/
+**/.idea/
 
 # Python Artifacts
-**/__pycache__
+**/__pycache__/
 **/*.py[cod]
-**/.venv
-**/env
-**/venv
+**/.venv/
+**/env/
+**/venv/
 
 # Build Artifacts
-**/build
-**/dist
+**/build/
+**/dist/
+**/*.egg-info/
 
 # Temporary Files
 **/*~
-**/.tmp
+**/.tmp/
 
 # Version Control
-**/.git
+**/.git/
 
 # SSH Keys
 **/**/.ssh/id_*
@@ -30,5 +31,9 @@
 
 # Makefile
 Makefile
+
+# Configuration Files
+*.dockerignore
+.dockerignore
 
 # End of file
