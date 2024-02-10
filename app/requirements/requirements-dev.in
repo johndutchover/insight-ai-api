@@ -1,5 +1,5 @@
 # requirements-dev.in
--r requirements.in
+-r requirements.txt
 conventional-pre-commit
 httpx
 pre-commit

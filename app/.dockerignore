@@ -28,4 +28,7 @@
 **/**/.ssh/id_*
 **/**/.ssh/*_id_*
 
+# Makefile
+Makefile
+
 # End of file

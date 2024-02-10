@@ -1,5 +1,5 @@
 # requirements-test.in
--r base.in
+-r base.txt
 black
 flake8
 mock
