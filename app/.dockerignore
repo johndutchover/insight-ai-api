@@ -29,9 +29,6 @@
 **/**/.ssh/id_*
 **/**/.ssh/*_id_*
 
-# Makefile
-Makefile
-
 # Configuration Files
 *.dockerignore
 .dockerignore

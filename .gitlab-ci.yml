@@ -70,11 +70,10 @@ bandit:
 deploy-backend:
   stage: deploy
   script:
-    - ls -la
-    - echo "Content of the repository:"
-    - ls -la $CI_PROJECT_DIR
+    - ls -la $CI_PROJECT_DIR\app
+    - ls -la $CI_PROJECT_DIR\app\requirements
     - flyctl auth token $FLY_API_TOKEN
-    - flyctl deploy --ha=false --config app/fly.toml --remote-only -a insight-ai-api --debug
+    - flyctl deploy --ha=false --config app/fly.toml --dockerfile app/Dockerfile -a insight-ai-api
   environment: production
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
