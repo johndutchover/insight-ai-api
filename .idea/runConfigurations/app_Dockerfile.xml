@@ -6,6 +6,7 @@
         <option name="buildCliOptions" value="--no-cache " />
         <option name="buildOnly" value="true" />
         <option name="containerName" value="" />
+        <option name="contextFolderPath" value="." />
         <option name="showCommandPreview" value="true" />
         <option name="sourceFilePath" value="app/Dockerfile" />
       </settings>
