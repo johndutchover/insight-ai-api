@@ -10,15 +10,10 @@ skips = ["B104"]
 # black configuration
 [tool.black]
 line-length = 88
-exclude = '(\.idea/|app/fly.toml|frontend/fly.toml)'
 
 # flake8 configuration
 [tool.flake8]
-exclude = '.idea,app/fly.toml,frontend/fly.toml'
-
-# poethepoet tasks
-[tool.poe.tasks]
-test = "pytest --cov=app -v"
+exclude = '(\.idea/|app/fly.toml)'
 
 [tool.pylint]
 skips = ["E0401"]

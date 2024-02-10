@@ -1,0 +1,8 @@
+# requirements-dev.in
+-r requirements.in
+conventional-pre-commit
+httpx
+pre-commit
+pydantic-settings
+types-requests
+uvicorn

@@ -2,13 +2,25 @@ import os
 
 import marvin
 from fastapi import FastAPI
-from marvin import ai_fn, ai_model, AIApplication
+from marvin.beta.applications import Application
 from pydantic import BaseModel
+from dotenv import load_dotenv
 
-from .routers import facts, poems, translate
+from routers import facts, poems, translate
 
 marvin.settings.llm_model = "openai/gpt-3.5-turbo"
-marvin_openai_api_key = os.getenv("MARVIN_OPENAI_API_KEY")
+marvin_openai_api_key = os.environ.get("MARVIN_OPENAI_API_KEY")
+
+if not marvin_openai_api_key:
+    # Load the API key from .env if not set in the environment
+    load_dotenv()
+    marvin_openai_api_key = os.getenv("MARVIN_OPENAI_API_KEY")
+
+if marvin_openai_api_key:
+    marvin.settings.openai.api_key = marvin_openai_api_key
+else:
+    raise ValueError("main.py OpenAI API key is not set.")
+
 
 # Create FastAPI instance
 app = FastAPI()
@@ -48,27 +60,27 @@ class InsightState(BaseModel):
     todos: list[Insight] = []
 
 
-insight_app = AIApplication(
+insight_app = Application(
     state=InsightState(),
     description="A simple app to provide insights using OpenAI.",
 )
 
 
 # Define routes for generating fruits and vegetables
-@ai_fn
+@marvin.fn
 async def generate_fruits(n: int, color: str) -> list[str]:
     """Generates a list of `n` fruits"""
     return ["apple", "banana", "orange"]
 
 
-@ai_fn
+@marvin.fn
 def generate_vegetables(n: int, color: str) -> list[str]:
     """Generates a list of `n` vegetables of color `color`"""
     return ["carrot", "potato", "onion"]
 
 
 # Define a pydantic model for a person
-@ai_model
+@marvin.model
 class Person(BaseModel):
     first_name: str
     last_name: str
@@ -77,4 +89,4 @@ class Person(BaseModel):
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)

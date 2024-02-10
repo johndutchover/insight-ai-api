@@ -1,7 +1,0 @@
-# fe-requirements.in
-python-dotenv
-streamlit>=1.28.2
-streamlit_extras>=0.3.5
-watchdog
-requests
-pipdeptree
