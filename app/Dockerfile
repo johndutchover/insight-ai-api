@@ -20,7 +20,9 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 EXPOSE 8000
 
 # Install curl for health check
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update && apt-get install --no-install-recommends -y curl \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 HEALTHCHECK --interval=5m --timeout=3s \
   --start-period=1m \
