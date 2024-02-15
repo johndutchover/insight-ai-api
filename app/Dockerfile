@@ -3,18 +3,18 @@
 FROM python:3.11 as base
 
 # Set the working directory in the Docker image
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Copy the entire app directory into the container at /usr/src/app
-COPY app/requirements/requirements.txt /usr/src/app
+# Copy the entire app directory into the container at /app
+COPY app/requirements/requirements.txt /app
 # use trailing . to include hidden files
-COPY app/. /usr/src/app
+COPY app/. /app
 
 # Create and activate a virtual environment
-RUN python -m venv venv
+RUN python3 -m venv venv
 
 # Activate the virtual environment and install dependencies
-RUN  . venv/bin/activate && pip install --no-cache-dir --upgrade -r requirements.txt
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 # Make port 8000 available to the world outside this container
 EXPOSE 8000
@@ -29,4 +29,4 @@ HEALTHCHECK --interval=5m --timeout=3s \
   CMD curl --fail http://localhost:8000/docs || exit 1
 
 # Set entrypoint for FastAPI when the container launches
-ENTRYPOINT ["python", "main.py"]
+CMD ["python", "./main.py"]
