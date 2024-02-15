@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 # Use an official Python runtime as a parent image
-FROM python:3.11.7 as base
+FROM python:3.11 as base
 
 # Set the working directory in the Docker image
 WORKDIR /usr/src/app
@@ -14,13 +14,13 @@ COPY app/. /usr/src/app
 RUN python -m venv venv
 
 # Activate the virtual environment and install dependencies
-RUN pip install --no-cache-dir --upgrade -r requirements.txt
+RUN  . venv/bin/activate && pip install --no-cache-dir --upgrade -r requirements.txt
 
 # Make port 8000 available to the world outside this container
 EXPOSE 8000
 
 # Install curl for health check
-RUN apt-get update && apt-get install --no-install-recommends -y curl=8.5.0 \
+RUN apt-get update && apt-get install --no-install-recommends -y curl=7.88.1-10+deb12u5 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

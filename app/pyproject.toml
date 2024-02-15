@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "insight-ai-api"
-requires-python = ">=3.11"
+requires-python = ">=3.11, <=3.12"
 authors = [
   { name = "John Dutchover", email = "1983909-johndutchover@users.noreply.gitlab.com" },
 ]

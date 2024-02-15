@@ -19,11 +19,7 @@ This is a simplistic FastAPI app that uses AI features to enhance api service.
 - GitLab
     - for career reasons
 
-Set Python version using pyenv
-
-`pyenv local 3.11.7`
-
-- writes to `.python-version`
+[Install pyenv](https://github.com/pyenv/pyenv)
 
 ### Initialize for development
 
@@ -36,6 +32,7 @@ From repository root:
 ### Dependency management
 
 #### Makefile
+Execute commands from app/
 
 Makefile command table
 
@@ -73,7 +70,6 @@ Makefile command table
 
 - pre-commit-hooks
 - black
-  - `pyproject.toml`
 - flake8
   - `.flake8`
 - bandit
