@@ -6,7 +6,7 @@ workflow:
     - when: never
 
 default:
-  image: python:3.11.7
+  image: python:3.11
 before_script:
   - apt-get update -qq && apt-get install -y curl
   - curl -L https://fly.io/install.sh | sh
@@ -45,7 +45,7 @@ install_dependencies:
 
 config_changes:
   stage: test
-  image: python:3.11.7
+  image: python:3.11
   script:
     - source .venv/bin/activate
   rules:
