@@ -20,7 +20,7 @@ RUN pip install --no-cache-dir --upgrade -r requirements.txt
 EXPOSE 8000
 
 # Install curl for health check
-RUN apt-get update && apt-get install --no-install-recommends -y curl \
+RUN apt-get update && apt-get install --no-install-recommends -y curl=8.6.0 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
