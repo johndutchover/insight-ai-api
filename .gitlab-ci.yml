@@ -29,9 +29,9 @@ install_dependencies:
   stage: install
   script:
     - source .venv/bin/activate
-    -  python -m pip install -r app/requirements/requirements-dev.txt
-    -  python -m pip install -r app/requirements/requirements.txt
-    -  python -m pip install pre-commit
+    - python -m pip install -r app/requirements/requirements-dev.txt
+    - python -m pip install -r app/requirements/requirements.txt
+    - python -m pip install pre-commit
   rules:
     - changes:
         - Makefile
