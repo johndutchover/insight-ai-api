@@ -1,5 +1,5 @@
 # local.in
+uv
 pipdeptree
-tox
 pre-commit
 conventional-pre-commit
