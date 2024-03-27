@@ -1,3 +1,4 @@
+import logging
 import os
 
 import marvin
@@ -9,18 +10,25 @@ from dotenv import load_dotenv
 from routers import facts, poems, translate
 
 marvin.settings.llm_model = "openai/gpt-3.5-turbo"
+
+# Check if the OpenAI API key is already set in environment variables
 marvin_openai_api_key = os.environ.get("MARVIN_OPENAI_API_KEY")
 
-if not marvin_openai_api_key:
+if marvin_openai_api_key is None:
     # Load the API key from .env if not set in the environment
     load_dotenv()
+
+    # Retrieve the API key from the loaded .env file
     marvin_openai_api_key = os.getenv("MARVIN_OPENAI_API_KEY")
 
-if marvin_openai_api_key:
+if marvin_openai_api_key is not None:
     marvin.settings.openai.api_key = marvin_openai_api_key
 else:
-    raise ValueError("main.py OpenAI API key is not set.")
+    logging.warning("OpenAI API key is not set. Some functionality may be limited.")
 
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Create FastAPI instance
 app = FastAPI()
