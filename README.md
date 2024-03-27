@@ -32,15 +32,14 @@ From repository root:
 ### Dependency management
 
 #### Makefile
-Execute commands from app/
 
 Makefile command table
 
-| Command            | Purpose                                  |
-|--------------------|------------------------------------------|
-| `make init`        | Initialize Python environment            |
-| `make update`      | Update and Initialize Python environment |
-| `make update-deps` | Update Python dependencies               |
+| Command                 | Purpose                                  |
+|-------------------------|------------------------------------------|
+| `make update`           | Update and Initialize Python environment |
+| `make update-deps`      | Update Python dependencies               |
+| `make update-precommit` | Update Pre-Commit                        |
 
 ### GitLab CI
 
@@ -79,3 +78,7 @@ Makefile command table
 - checkmake
   - configured in `.gitlab-ci.yml`
   - run by MegaLinter
+
+### Fly
+- MARVIN_OPENAI_API_KEY
+  - uses [fly secrets](https://fly.io/docs/reference/config/#secrets)
