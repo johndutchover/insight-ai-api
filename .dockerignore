@@ -6,17 +6,23 @@
 **/.vscode/
 **/.idea/
 
+# Fly history
+**/.history/
+
 # Python Artifacts
 **/__pycache__/
 **/*.py[cod]
 **/.venv/
 **/env/
+**/.env
 **/venv/
 
 # Build Artifacts
 **/build/
 **/dist/
 **/*.egg-info/
+**/.pytest_cache/
+**/.coverage
 
 # Temporary Files
 **/*~
