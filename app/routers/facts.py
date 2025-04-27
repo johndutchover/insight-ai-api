@@ -1,6 +1,6 @@
-from pydantic import BaseModel
 import marvin
 from fastapi import APIRouter
+from pydantic import BaseModel
 
 router = APIRouter()
 
@@ -20,6 +20,8 @@ def generate_fact_ai(n: int) -> str:
     Returns:
         str: The generated fact as the value.
     """
+    # Placeholder implementation for generating a fact
+    return f"The number {n} is interesting because it is {n * 2} when doubled."
 
 
 @router.post("/fact_to_number", response_model=FormatResponse)

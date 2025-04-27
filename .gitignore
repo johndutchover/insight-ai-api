@@ -227,3 +227,6 @@ $RECYCLE.BIN/
 *.msp
 *.lnk
 # End of file
+# pixi environments
+.pixi
+*.egg-info
