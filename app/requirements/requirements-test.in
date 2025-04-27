@@ -1,7 +1,0 @@
-# requirements-test.in
--r base.txt
-black
-flake8
-mock
-pytest
-pytest-cov

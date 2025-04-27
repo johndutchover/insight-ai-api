@@ -10,14 +10,14 @@ This is a simplistic FastAPI app that uses AI features to enhance api service.
 
 - [FastAPI](https://github.com/tiangolo/fastapi)
 - Pydantic
-    - Data validation
+  - Data validation
 - [Marvin](https://github.com/prefecthq/marvin)
-    - AI engineering framework
+  - AI engineering framework
 - Pytest
 - [pre-commit](https://github.com/pre-commit/pre-commit)
-    - pre-commit hooks
+  - pre-commit hooks
 - GitLab
-    - for career reasons
+  - for career reasons
 
 [Install pyenv](https://github.com/pyenv/pyenv)
 
@@ -31,15 +31,13 @@ From repository root:
 
 ### Dependency management
 
-#### Makefile
+#### Project files
 
-Makefile command table
-
-| Command                 | Purpose                                  |
-|-------------------------|------------------------------------------|
-| `make update`           | Update and Initialize Python environment |
-| `make update-deps`      | Update Python dependencies               |
-| `make update-precommit` | Update Pre-Commit                        |
+| File                      | Purpose             |
+| ------------------------- | ------------------- |
+| `pyproject.toml`          | root project file   |
+| `app/pyproject.toml`      | API                 |
+| `frontend/pyproject.toml` | Frontend Pre-Commit |
 
 ### GitLab CI
 
@@ -50,20 +48,20 @@ Makefile command table
 ##### Variables
 
 - MARVIN_OPENAI_API_KEY
-    - attributes: masked, expanded
+  - attributes: masked, expanded
 - FLY_API_TOKEN
-    - attributes: masked, expanded
+  - attributes: masked, expanded
 - GITLAB_ACCESS_TOKEN_MEGALINTER
   - attributes: masked
 
 #### .gitlab-ci.yml
 
 - stages
-    - install
-    - test
-    - code_quality
-    - deploy
-        - uses `flyctl`
+  - install
+  - test
+  - code_quality
+  - deploy
+    - uses `flyctl`
 
 #### .pre-commit-config.yaml
 
@@ -80,5 +78,6 @@ Makefile command table
   - run by MegaLinter
 
 ### Fly
+
 - MARVIN_OPENAI_API_KEY
   - uses [fly secrets](https://fly.io/docs/reference/config/#secrets)

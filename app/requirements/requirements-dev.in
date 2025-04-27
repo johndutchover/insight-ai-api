@@ -1,9 +1,0 @@
-# requirements-dev.in
--r requirements.txt
-conventional-pre-commit
-httpx
-pre-commit
-pydantic-settings
-types-requests
-uvicorn
-black
